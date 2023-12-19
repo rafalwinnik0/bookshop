@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Book
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, NewBookForm
 from django.views.decorators.csrf import csrf_protect
 # @csrf_protect
 
@@ -18,3 +18,13 @@ def register(request):
         new_user.save()
     user_form = UserRegistrationForm()
     return render(request, 'myapp/register.html', {'user_form':user_form})
+
+def add_book(request):
+
+    if request.method == "POST":
+        form = NewBookForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_book = form.save()
+
+    form = NewBookForm()
+    return render(request, 'myapp/add_book.html', {'form':form})
