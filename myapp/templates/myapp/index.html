@@ -52,6 +52,7 @@
                 </a>
                 <div class="card-body d-flex flex-column text-center">
                     <h5 class="card-title">{{ book.title }}</h5>
+                    <a href="{% url 'author_site' book.author %}"> {{ book.author }} </a>
 {#                    <p class="card-text">{{ book.description }}</p>#}
                     <a href="#" class="btn btn-success d-grid">${{ book.price }}</a>
                 </div>
@@ -61,7 +62,7 @@
     </div>
 
 
-    <h4 class="mt-5">Bestsellery</h4>
+    <h4 class="mt-3">Bestsellery</h4>
     <div class="row row-cols-5 g-4">
         {% for book in books %}
             <div class="col">
@@ -81,7 +82,7 @@
 
     <h4 class="mt-3">Książki Liama Nessona</h4>
     <div class="row row-cols-5">
-        {% for book in books %}
+        {% for book in Adam_Mickiewicz_books %}
         <div class="col">
             <div class="card h-100" style="width: 8rem;" >
                 <img src="{{ book.file.url }}" class="card-img-top" alt="{{ book.title }} " height="" length="">
