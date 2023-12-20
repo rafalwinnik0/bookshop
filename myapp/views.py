@@ -28,3 +28,11 @@ def add_book(request):
 
     form = NewBookForm()
     return render(request, 'myapp/add_book.html', {'form':form})
+
+def edit_book(request):
+    return render(request, 'myapp/edit_book.html')
+
+def show_book(request, id):
+
+    book = Book.objects.get(id=id)
+    return render(request, 'myapp/show_book.html', {'book':book})

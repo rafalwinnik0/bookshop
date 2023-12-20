@@ -46,16 +46,16 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a></li>
                       </ul>
-{#                    </li>#}
-{#                      <li class="nav-item">#}
-{#                      <a class="nav-link" href="">KSIĄŻki</a>#}
-{#                    </li>#}
-{#                      <li class="nav-item">#}
-{#                          <a class="nav-link" href="{% url 'login' %}">ZALoguj</a>#}
-{#                      </li>#}
-{#                    <li class="nav-item">#}
-{#                          <a class="nav-link" href="{% url 'logout' %}">WYLoGUJ</a>#}
-{#                      </li>#}
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        KSIĄŻKI
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'add_book' %}">DODAJ</a></li>
+                        <li><a class="dropdown-item" href="{% url 'edit_book' %}">EDYTUJ</a></li>
+                      </ul>
+                    </li>
                   </ul>
                   <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="SEARCH" aria-label="Search">
