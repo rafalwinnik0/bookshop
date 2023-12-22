@@ -1,17 +1,47 @@
-{#{% extends 'myapp/base.html' %}#}
-{#{% block body %}#}
-{#<div class="card mb-3" style="max-width: 540px;">#}
-{#  <div class="row g-0">#}
-{#    <div class="col-md-4">#}
-{#      <img src="..." class="img-fluid rounded-start" alt="...">#}
-{#    </div>#}
-{#    <div class="col-md-8">#}
-{#      <div class="card-body">#}
-{#        <h5 class="card-title">Card title</h5>#}
-{#        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
-{#        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{#</div>#}
-{#{% endblock %}#}
+{% extends 'myapp/base.html' %}
+{% block body %}
+    <form enctype="multipart/form-data" method="POST">
+    <div class="row d-flex justify-content-center border border-primary">
+        <div class="card border border-secondary">
+            <div class="row border border-primary">
+
+                    {% csrf_token %}
+                <div class="col-md-4 my-auto">
+                    <img src="{{ form.instance.file.url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="">
+                                <label>title:</label>
+                                {{ form.title }}
+                            </div>
+                            <div class="mt-2">
+                                <label>price:</label>
+                                {{ form.price }}
+                            </div>
+                            <div class="mt-2">
+                                <label>description:</label>
+                                {{ form.description }}
+                            </div>
+                            <div class="mt-2">
+                                <label>created:</label>
+                                {{ book.created }}
+                            </div>
+                            <div class="mt-2">
+                                <label>modified:</label>
+                                {{ book.modified }}
+                            </div>
+                            <div class="d-grid col-6 mx-auto mt-2">
+                                <button type="submit">SAVE</button>
+                            </div>
+                        </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </form>
+{% endblock %}
+
+

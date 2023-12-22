@@ -8,7 +8,7 @@ class UserRegistrationForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'first_name', 'password']
 
-class NewBookForm(forms.ModelForm):
+class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'price', 'description', 'file']
+        fields = ['title', 'price', 'description', 'author', 'file']
