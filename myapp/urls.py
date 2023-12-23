@@ -11,8 +11,8 @@ urlpatterns = [
     path("register/", views.register, name='register'),
     path("login/", auth_views.LoginView.as_view(template_name='myapp/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='myapp/logout.html'), name='logout'),
-    path('add_book/', views.add_book, name='add_book'),
-    path('edit_book/<int:book_id>/', views.edit_book, name='edit_book'),
+    path('addbook/', views.add_book, name='add_book'),
+    path('editbook/<int:book_id>/', views.edit_book, name='edit_book'),
     path('<int:book_id>/', views.show_book, name='show_book'),
     path('<slug:author>/', views.author_site, name='author_site'),
 

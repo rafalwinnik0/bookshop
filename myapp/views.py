@@ -58,4 +58,4 @@ def edit_book(request, book_id):
             form.save()
     else:
         form = BookForm(instance=book)
-    return render(request, 'myapp/edit_book.html', {'form': form, 'book':book})
+    return render(request, 'myapp/edit_book.html', {'form': form, 'book': book})
