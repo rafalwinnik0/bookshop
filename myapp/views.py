@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Book
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Book, Order, OrderItem
 from .forms import UserRegistrationForm, BookForm
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 def index(request):
@@ -59,3 +62,30 @@ def edit_book(request, book_id):
     else:
         form = BookForm(instance=book)
     return render(request, 'myapp/edit_book.html', {'form': form, 'book': book})
+
+
+@login_required()
+@require_POST
+def add_to_cart(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    order, created = Order.objects.get_or_create(user=request.user, defaults={})
+    order_item, created = OrderItem.objects.get_or_create(order=order, book=book, defaults={'quantity': 1})
+    if not created:
+        order_item.quantity += 1
+        order_item.save()
+
+    response_data = {
+        'message': 'Książka dodana do koszyka',
+        'book_id': book_id,
+        'quantity': order_item.quantity
+    }
+    return JsonResponse(response_data)
+
+
+# STWORZENIE ZAMÓWIENIA
+
+# book_instance = Book.objects.get(id=book_id)  # Pobranie konkretnej książki
+# order_instance = Order.objects.get(id=order_id)  # Pobranie konkretnego zamówienia
+#
+# order_item = OrderItem(book=book_instance, order=order_instance, quantity=2)
+# order_item.save()

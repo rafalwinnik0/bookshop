@@ -59,7 +59,7 @@
                         <a href="{% url 'author_site' book.author %}"> {{ book.author }} </a>
                     {% endif %}
 
-                    <a href="#" class="btn btn-success mt-auto">${{ book.price }}</a>
+                    <button onclick="addToCart({{ book.id }})" class="btn btn-success mt-auto">${{ book.price }}</button>
                 </div>
             </div>
         </div>
