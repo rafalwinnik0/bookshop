@@ -65,6 +65,11 @@
                   </form>
               </div>
           </div>
+          {% if user.is_authenticated %}
+              <a class="navbar-brand" href="{% url 'cart' %}">
+              <img src="{% static 'user_icon.png' %}" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
+              {{ user.username }}</a>
+          {% endif %}
       </div>
     </nav>
 

@@ -82,6 +82,14 @@ def add_to_cart(request, book_id):
     return JsonResponse(response_data)
 
 
+def cart(request):
+    order = Order.objects.get(user=request.user)
+    order_items = OrderItem.objects.filter(order=order).prefetch_related('book')
+
+
+    return render(request, 'myapp/cart.html', {'order_items': order_items})
+
+
 # STWORZENIE ZAMÓWIENIA
 
 # book_instance = Book.objects.get(id=book_id)  # Pobranie konkretnej książki
