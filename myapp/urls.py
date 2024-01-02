@@ -17,5 +17,7 @@ urlpatterns = [
     path('author/<slug:author>/', views.author_site, name='author_site'),
     path('add-to-cart/<int:book_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/', views.cart, name='cart'),
+    path('remove-from-cart/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('update-quantity/<int:item_id>/', views.update_quantity, name='update_quantity'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

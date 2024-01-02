@@ -4,6 +4,7 @@ from .forms import UserRegistrationForm, BookForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+import json
 
 
 def index(request):
@@ -85,15 +86,30 @@ def add_to_cart(request, book_id):
 def cart(request):
     order = Order.objects.get(user=request.user)
     order_items = OrderItem.objects.filter(order=order).prefetch_related('book')
-
-
     return render(request, 'myapp/cart.html', {'order_items': order_items})
 
+@login_required
+def remove_from_cart(request, item_id):
+    if request.method == 'POST':
+        try:
+            order_item = OrderItem.objects.get(id=item_id, order__user=request.user)
+            order_item.delete()
+            response_data = {'success': True}
+        except OrderItem.DoesNotExist:
+            response_data = {'success': False, 'error': 'Item does not exist'}
+        return JsonResponse(response_data)
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request'})
 
-# STWORZENIE ZAMÓWIENIA
+@login_required
+def update_quantity(request, item_id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        new_quantity = data.get('quantity')
+        item = OrderItem.objects.get(id=item_id, order__user=request.user)
+        item.quantity = new_quantity
+        item.save()
+        return JsonResponse({'success': True, 'new_quantity': new_quantity})
+    else:
+        return JsonResponse({'success': False})
 
-# book_instance = Book.objects.get(id=book_id)  # Pobranie konkretnej książki
-# order_instance = Order.objects.get(id=order_id)  # Pobranie konkretnego zamówienia
-#
-# order_item = OrderItem(book=book_instance, order=order_instance, quantity=2)
-# order_item.save()

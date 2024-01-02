@@ -126,6 +126,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
         function addToCart(bookId) {
 
             fetch('/add-to-cart/' + bookId + '/', {
@@ -153,20 +168,57 @@
             });
         }
 
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
+        function removeFromCart(itemId) {
+            fetch('/remove-from-cart/' + itemId + '/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'item_id': itemId})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    var itemElement = document.getElementById('item-' + itemId)
+                    if (itemElement) {
+                        itemElement.remove();
                     }
+                    alert("Książka została usunięta z koszyka!");
+                } else {
+                    alert("Wystąpił błąd: " + data.error);
                 }
-            }
-            return cookieValue;
+            });
         }
+
+        function changeQuantity(button, change) {
+            var itemId = button.getAttribute('data-item-id');
+            var quantityInput = document.getElementById('quantity-' + itemId);
+            var currentQuantity = parseInt(quantityInput.value);
+            var newQuantity = currentQuantity + change;
+            console.log(JSON.stringify({'quantity': newQuantity}));
+
+            if (newQuantity >= 0) {
+                fetch('/update-quantity/' + itemId + '/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({'quantity': newQuantity})
+
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        quantityInput.value = data.new_quantity;
+                    } else {
+                        alert("Nie można zaktualizować ilości");
+                    }
+                });
+            }
+        }
+
     </script>
   </body>
 </html>
