@@ -196,7 +196,7 @@
             var quantityInput = document.getElementById('quantity-' + itemId);
             var currentQuantity = parseInt(quantityInput.value);
             var newQuantity = currentQuantity + change;
-            console.log(JSON.stringify({'quantity': newQuantity}));
+            var productPrice = document.getElementById('total-price-' + itemId);
 
             if (newQuantity >= 0) {
                 fetch('/update-quantity/' + itemId + '/', {
@@ -212,6 +212,8 @@
                 .then(data => {
                     if(data.success) {
                         quantityInput.value = data.new_quantity;
+                        productPrice.innerHTML = "$" + data.new_value;
+
                     } else {
                         alert("Nie można zaktualizować ilości");
                     }

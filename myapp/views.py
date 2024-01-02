@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from .models import Book, Order, OrderItem
 from .forms import UserRegistrationForm, BookForm
 from django.contrib.auth.decorators import login_required
@@ -83,10 +83,13 @@ def add_to_cart(request, book_id):
     return JsonResponse(response_data)
 
 
+@login_required()
 def cart(request):
     order = Order.objects.get(user=request.user)
     order_items = OrderItem.objects.filter(order=order).prefetch_related('book')
-    return render(request, 'myapp/cart.html', {'order_items': order_items})
+    total_cost = sum(item.total_price() for item in order_items)
+    return render(request, 'myapp/cart.html', {'total_cost': total_cost, 'order_items': order_items})
+
 
 @login_required
 def remove_from_cart(request, item_id):
@@ -101,6 +104,7 @@ def remove_from_cart(request, item_id):
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request'})
 
+
 @login_required
 def update_quantity(request, item_id):
     if request.method == "POST":
@@ -109,7 +113,6 @@ def update_quantity(request, item_id):
         item = OrderItem.objects.get(id=item_id, order__user=request.user)
         item.quantity = new_quantity
         item.save()
-        return JsonResponse({'success': True, 'new_quantity': new_quantity})
+        return JsonResponse({'success': True, 'new_quantity': new_quantity, 'new_value': item.total_price()})
     else:
         return JsonResponse({'success': False})
-

@@ -31,4 +31,7 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"Order {self.order.id}, Book: {self.book.title}, Quantity: {self.quantity}"
 
+    def total_price(self):
+        return self.quantity * self.book.price
+
 
