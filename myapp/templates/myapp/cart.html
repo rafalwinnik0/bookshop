@@ -64,15 +64,20 @@
                 </td>
 
                 <td class="align-middle">
-                  <p id="total-price-{{ item.id }}" value="{{ item.total_price }}" class="mb-0" style="font-weight: 500;">${{ item.total_price }}</p>
+                  <p id="total-price-{{ item.id }}"  class="mb-0" style="font-weight: 500;">${{ item.total_price }}</p>
                 </td>
               </tr>
 
 
                 {% endfor %}
+
+
+
             {% else %}
                 <p>Twój koszyk jest pusty.</p>
             {% endif %}
+
+            <p id="totalCart">Total: {{ total_cost }}</p>
 
             </tbody>
           </table>

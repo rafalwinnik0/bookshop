@@ -197,6 +197,7 @@
             var currentQuantity = parseInt(quantityInput.value);
             var newQuantity = currentQuantity + change;
             var productPrice = document.getElementById('total-price-' + itemId);
+            var totalPrice = document.getElementById('totalCart');
 
             if (newQuantity >= 0) {
                 fetch('/update-quantity/' + itemId + '/', {
@@ -213,6 +214,7 @@
                     if(data.success) {
                         quantityInput.value = data.new_quantity;
                         productPrice.innerHTML = "$" + data.new_value;
+                        totalPrice.innerHTML = "$" + data.total;
 
                     } else {
                         alert("Nie można zaktualizować ilości");

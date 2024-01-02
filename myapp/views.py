@@ -113,6 +113,11 @@ def update_quantity(request, item_id):
         item = OrderItem.objects.get(id=item_id, order__user=request.user)
         item.quantity = new_quantity
         item.save()
-        return JsonResponse({'success': True, 'new_quantity': new_quantity, 'new_value': item.total_price()})
+        order = Order.objects.get(user=request.user)
+        total = order.total_value()
+        return JsonResponse({'success': True,
+                             'new_quantity': new_quantity,
+                             'new_value': item.total_price(),
+                             'total': total})
     else:
         return JsonResponse({'success': False})
