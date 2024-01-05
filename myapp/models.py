@@ -38,3 +38,12 @@ class OrderItem(models.Model):
         return self.quantity * self.book.price
 
 
+class DeliveryModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    address = models.CharField(max_length=30)
+    zip_code = models.CharField(max_length=10)
+    country = models.CharField(max_length=50)
+
+

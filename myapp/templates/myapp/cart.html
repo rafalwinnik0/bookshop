@@ -43,21 +43,22 @@
 
                 <td class="align-middle">
                     <div class="d-flex flex-row">
-                        <button onClick="removeFromCart({{ item.id }})" class="btn btn-danger">USUN</button>
+                        <button onClick="removeFromCart({{ item.id }})" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 </td>
 
-
                 <td class="align-middle">
                   <div class="d-flex flex-row">
-                    <button class="btn btn-link px-2 border-primary" onclick="changeQuantity(this, -1)" data-item-id="{{ item.id }}">
+                    <button class="px-2" onclick="changeQuantity(this, -1)" data-item-id="{{ item.id }}">
                       <i class="fas fa-minus" style="color:black;"></i>
                     </button>
 
                     <input id="quantity-{{ item.id }}" min="0" name="quantity" value="{{ item.quantity }}" type="number"
                       class="form-control form-control-sm" style="width: 50px;" data-item-id="{{ item.id }}" />
 
-                    <button class="btn btn-link px-2 border-primary" onclick="changeQuantity(this, 1)" data-item-id="{{ item.id }}">
+                    <button class="px-2" onclick="changeQuantity(this, 1)" data-item-id="{{ item.id }}">
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
@@ -70,14 +71,28 @@
 
 
                 {% endfor %}
+              <tr class="align-middle">
+                <td></td>
+                <td>
+                    <a href="{% url 'index' %}" class="btn btn-success">Wróc do zakupów</a>
+                </td>
+                <td>
+                    <a href="{% url 'delivery_form' %}" class="btn btn-success">Przejdź do dostawy</a>
+                </td>
+                <td><p id="totalCart">${{ total_cost }}</p></td>
+              </tr>
 
 
 
             {% else %}
-                <p>Twój koszyk jest pusty.</p>
+                <p class="text-center">Twój koszyk jest pusty.</p>
             {% endif %}
 
-            <p id="totalCart">Total: {{ total_cost }}</p>
+
+
+
+
+
 
             </tbody>
           </table>
