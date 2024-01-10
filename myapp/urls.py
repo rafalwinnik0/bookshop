@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.index, name='index'),
-    path("modal_site/", views.modal_site, name='modal_site'),
     path("register/", views.register, name='register'),
     path("login/", auth_views.LoginView.as_view(template_name='myapp/login.html'), name='login'),
     path("logout/", auth_views.LogoutView.as_view(template_name='myapp/logout.html'), name='logout'),
@@ -23,6 +22,7 @@ urlpatterns = [
     path('history/', views.history, name='history'),
     path('addresses/', views.addresses, name='addresses'),
     path('fill-address/', views.fill_address, name='fill_address'),
+    path('account/', views.account, name='account'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

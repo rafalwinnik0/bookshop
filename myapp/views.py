@@ -15,10 +15,6 @@ def index(request):
                   {'books': books, 'Adam_Mickiewicz_books': adam_mickiewicz_books})
 
 
-def modal_site(request):
-    return render(request, 'myapp/modal_site.html')
-
-
 def register(request):
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
@@ -102,7 +98,7 @@ def remove_from_cart(request, item_id):
         try:
             order_item = OrderItem.objects.get(id=item_id)
             order_item.delete()
-            order = Order.objects.get(user=request.user)
+            order = Order.objects.get(user=request.user, status='pending')
             total = order.total_value()
             response_data = {'success': True, 'total': total}
         except OrderItem.DoesNotExist:
@@ -123,7 +119,7 @@ def update_quantity(request, item_id):
         item = OrderItem.objects.get(id=item_id, order__user=request.user)
         item.quantity = new_quantity
         item.save()
-        order = Order.objects.get(user=request.user)
+        order = Order.objects.get(user=request.user, status='pending')
         total = order.total_value()
         return JsonResponse({'success': True,
                              'new_quantity': new_quantity,
@@ -175,7 +171,6 @@ def fill_address(request):
     user_profile = UserProfile.objects.get(user=request.user)
     if user_profile:
         user_address = UserAddress.objects.filter(profile=user_profile).first()
-        print("4")
         response = {'success': True,
                     'first_name': user_address.address.first_name,
                     'last_name': user_address.address.last_name,
@@ -187,3 +182,9 @@ def fill_address(request):
         response = {'success': False}
 
     return JsonResponse(response)
+
+
+@login_required()
+def account(request):
+    return render(request, 'myapp/account.html')
+

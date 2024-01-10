@@ -45,6 +45,7 @@
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'register' %}">Zarejestruj</a></li>
                         <li><a class="dropdown-item" href="{% url 'login' %}">Zaloguj</a></li>
+                        <li><a class="dropdown-item" href="{% url 'account' %}">Konto</a></li>
                         <li><a class="dropdown-item" href="{% url 'history' %}">Historia</a></li>
                         <li><a class="dropdown-item" href="{% url 'addresses' %}">Adresy</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -77,6 +78,12 @@
           </div>
           {% if user.is_authenticated %}
               <a class="navbar-brand" href="{% url 'cart' %}">
+{#              <img src="{% static 'user_icon.png' %}" alt="logo" width="30" height="24" class="d-inline-block align-text-top">#}
+              <i class="far fa-shopping-cart"></i>
+              </a>
+
+
+              <a class="navbar-brand" href="{% url 'account' %}">
               <img src="{% static 'user_icon.png' %}" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
               {{ user.username }}</a>
           {% endif %}
