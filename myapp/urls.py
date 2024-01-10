@@ -22,6 +22,7 @@ urlpatterns = [
     path('delivery-form/<int:order_id>/', views.delivery_form, name='delivery_form'),
     path('history/', views.history, name='history'),
     path('addresses/', views.addresses, name='addresses'),
+    path('fill-address/', views.fill_address, name='fill_address'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

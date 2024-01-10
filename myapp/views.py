@@ -143,7 +143,9 @@ def delivery_form(request, order_id):
         if address_form.is_valid():
             address = address_form.save()
             user_profile, created = UserProfile.objects.get_or_create(user=request.user, defaults={})
-            user_address, created = UserAddress.objects.get_or_create(profile=user_profile, address=address, defaults={})
+            user_address, created = UserAddress.objects.get_or_create(profile=user_profile,
+                                                                      address=address,
+                                                                      defaults={})
             user_address.save()
             order.status = 'cancelled'
             order.save()
@@ -160,8 +162,28 @@ def history(request):
     orders = Order.objects.filter(user=request.user, status='cancelled').prefetch_related('orderitem_set')
     return render(request, 'myapp/history.html', {'orders': orders})
 
+
 @login_required()
 def addresses(request):
     user_profile = UserProfile.objects.get(user=request.user)
     addresses = UserAddress.objects.filter(profile=user_profile).prefetch_related('address')
     return render(request, 'myapp/addresses.html', {'addresses': addresses})
+
+
+@login_required()
+def fill_address(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if user_profile:
+        user_address = UserAddress.objects.filter(profile=user_profile).first()
+        print("4")
+        response = {'success': True,
+                    'first_name': user_address.address.first_name,
+                    'last_name': user_address.address.last_name,
+                    'address': user_address.address.address,
+                    'zip_code': user_address.address.address,
+                    'country': user_address.address.country,
+                    }
+    else:
+        response = {'success': False}
+
+    return JsonResponse(response)

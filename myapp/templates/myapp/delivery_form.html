@@ -2,21 +2,32 @@
 {% block body %}
 <p>Order ID: {{ order_id }}</p>
 <p>Status: {{ status }}</p>
+<button onclick="fillAddress()" class="btn btn-warning">Domyślny adres</button>
 <div class="row d-flex justify-content-center">
     <div class="col-md-6">
         <form method="POST">
         {% csrf_token %}
             <h3 class="">Billing adress</h3>
-{#            <div class="mt-3">#}
-{#                <label>Username:</label>#}
-{#                {{ form.username }}#}
-{#            </div>#}
-{#            <div class="mt-3">#}
-{#                <label>password:</label>#}
-{#                {{ form.password }}#}
-{#            </div>#}
-            {{ form.as_p }}
-
+            <div class="mt-3">
+                <label for="firstName">First name:</label>
+                {{ form.first_name }}
+            </div>
+            <div class="mt-3">
+                <label for="lastName">Last name:</label>
+                {{ form.last_name }}
+            </div>
+            <div class="mt-3">
+                <label for="address">Address:</label>
+                {{ form.address }}
+            </div>
+            <div class="mt-3">
+                <label for="zipCode">Zip code:</label>
+                {{ form.zip_code }}
+            </div>
+            <div class="mt-3">
+                <label for="country">Country:</label>
+                {{ form.country }}
+            </div>
         <button class="mt-3" type="submit">Gotowe</button>
         </form>
     </div>

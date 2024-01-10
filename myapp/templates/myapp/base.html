@@ -236,6 +236,29 @@
             }
         }
 
+        function fillAddress() {
+
+            fetch('/fill-address/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    document.getElementById('firstName').value = data.first_name;
+                    document.getElementById('lastName').value = data.last_name;
+                    document.getElementById('address').value = data.address;
+                    document.getElementById('zipCode').value = data.zip_code;
+                    document.getElementById('country').value = data.country;
+                } else {
+                    alert("There is no user address!");
+                }
+            });
+        }
+
 
     </script>
   </body>

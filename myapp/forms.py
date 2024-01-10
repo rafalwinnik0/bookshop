@@ -19,3 +19,11 @@ class AddressForm(forms.ModelForm):
         model = Address
         fields = ['first_name', 'last_name', 'address', 'zip_code', 'country']
 
+    def __init__(self, *args, **kwargs):
+        super(AddressForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs.update({'id': 'firstName'})
+        self.fields['last_name'].widget.attrs.update({'id': 'lastName'})
+        self.fields['address'].widget.attrs.update({'id': 'address'})
+        self.fields['zip_code'].widget.attrs.update({'id': 'zipCode'})
+        self.fields['country'].widget.attrs.update({'id': 'country'})
+
