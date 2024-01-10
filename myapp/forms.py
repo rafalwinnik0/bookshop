@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Book, DeliveryModel
+from .models import Book, Address
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -14,8 +14,8 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ['title', 'price', 'description', 'author', 'file']
 
-class DeliveryForm(forms.ModelForm):
+class AddressForm(forms.ModelForm):
     class Meta:
-        model = DeliveryModel
+        model = Address
         fields = ['first_name', 'last_name', 'address', 'zip_code', 'country']
 

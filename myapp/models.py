@@ -19,6 +19,12 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     books = models.ManyToManyField(Book, through='OrderItem')
 
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     def __str__(self):
         return f"User: {self.user}, Books: {self.books}"
 
@@ -38,12 +44,18 @@ class OrderItem(models.Model):
         return self.quantity * self.book.price
 
 
-class DeliveryModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Address(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     address = models.CharField(max_length=30)
     zip_code = models.CharField(max_length=10)
-    country = models.CharField(max_length=50)
+    country = models.CharField(max_length=15)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    addresses = models.ManyToManyField('Address', through='UserAddress')
 
 
+class UserAddress(models.Model):
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)

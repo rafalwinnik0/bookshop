@@ -1,0 +1,17 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+<div class="container mt-4">
+    <h2>Adresy użytkownika</h2>
+    {% for user_address in addresses %}
+        <div class="card mb-3">
+            <div class="card-header">Adres #{{ forloop.counter }}</div>
+            <div class="card-body">
+                <h5 class="card-title">Adres: {{ user_address.address.address }}</h5>
+                <p class="card-text">Kod pocztowy: {{ user_address.address.zip_code }}</p>
+                <p class="card-text">Kraj: {{ user_address.address.country }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Book, Order, OrderItem
-from .forms import UserRegistrationForm, BookForm, DeliveryForm
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Book, Order, OrderItem, UserProfile, UserAddress
+from .forms import UserRegistrationForm, BookForm, AddressForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -66,7 +66,7 @@ def edit_book(request, book_id):
 @require_POST
 def add_to_cart(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    order, created = Order.objects.get_or_create(user=request.user, defaults={})
+    order, created = Order.objects.get_or_create(user=request.user, status='pending', defaults={})
     order_item, created = OrderItem.objects.get_or_create(order=order, book=book, defaults={'quantity': 1})
     if not created:
         order_item.quantity += 1
@@ -82,16 +82,18 @@ def add_to_cart(request, book_id):
 
 @login_required()
 def cart(request):
-    if Order.objects.filter(user=request.user).exists():
-        print("exist")
-        order = Order.objects.get(user=request.user)
+    if Order.objects.filter(user=request.user, status='pending').exists():
+        order = Order.objects.get(user=request.user, status='pending')
+        order_id = order.id
         order_items = OrderItem.objects.filter(order=order).prefetch_related('book')
         total_cost = sum(item.total_price() for item in order_items)
     else:
-        print("doesnt exist")
+        order_id = 0
         total_cost = 0
         order_items = None
-    return render(request, 'myapp/cart.html', {'total_cost': total_cost, 'order_items': order_items})
+    return render(request, 'myapp/cart.html', {'total_cost': total_cost,
+                                               'order_items': order_items,
+                                               'order_id': order_id})
 
 
 @login_required
@@ -108,7 +110,6 @@ def remove_from_cart(request, item_id):
         if not OrderItem.objects.exists():
             order = Order.objects.get(user=request.user)
             order.delete()
-            print("Order deleted!")
         return JsonResponse(response_data)
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request'})
@@ -133,12 +134,34 @@ def update_quantity(request, item_id):
 
 
 @login_required()
-def delivery_form(request):
+def delivery_form(request, order_id):
+    order = Order.objects.get(id=order_id)
+    order.status = 'completed'
+    order.save()
     if request.method == 'POST':
-        form = DeliveryForm(request.POST)
-        if form.is_valid():
-            delivery_adress = form.save(commit=False)
-            delivery_adress.user = request.user
-            delivery_adress.save()
-    form = DeliveryForm()
-    return render(request, 'myapp/delivery_form.html', {'form': form})
+        address_form = AddressForm(request.POST)
+        if address_form.is_valid():
+            address = address_form.save()
+            user_profile, created = UserProfile.objects.get_or_create(user=request.user, defaults={})
+            user_address, created = UserAddress.objects.get_or_create(profile=user_profile, address=address, defaults={})
+            user_address.save()
+            order.status = 'cancelled'
+            order.save()
+            return redirect('index')
+
+    form = AddressForm()
+    return render(request, 'myapp/delivery_form.html', {'form': form,
+                                                        'order_id': order_id,
+                                                        'status': order.status})
+
+
+@login_required()
+def history(request):
+    orders = Order.objects.filter(user=request.user, status='cancelled').prefetch_related('orderitem_set')
+    return render(request, 'myapp/history.html', {'orders': orders})
+
+@login_required()
+def addresses(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    addresses = UserAddress.objects.filter(profile=user_profile).prefetch_related('address')
+    return render(request, 'myapp/addresses.html', {'addresses': addresses})

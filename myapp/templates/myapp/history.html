@@ -1,0 +1,23 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+<div class="container mt-4">
+    <h2>Historia zamówień</h2>
+    {% for order in orders %}
+        <div class="card mb-3">
+            <div class="card-header">Zamówienie #{{ order.id }}</div>
+            <div class="card-body">
+                <h5 class="card-title">Szczegóły zamówienia:</h5>
+                <ul class="list-group list-group-flush">
+                    {% for order_item in order.orderitem_set.all %}
+                        <li class="list-group-item">
+                            <img src="{{ order_item.book.file.url }}" class="img-thumbnail" style="width: 50px;" alt="Book Cover">
+                            {{ order_item.book.title }} - Ilość: {{ order_item.quantity }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

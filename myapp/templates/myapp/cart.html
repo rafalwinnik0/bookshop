@@ -30,7 +30,7 @@
 
 
               <tr id="item-{{ item.id }}">
-                <th scope="row">
+                <td scope="row">
                   <div class="d-flex align-items-center">
                     <img src="{{ item.book.file.url }}" class="img-fluid rounded-3"
                       style="width: 120px;" alt="Book">
@@ -39,7 +39,7 @@
                       <p class="mb-0">{{ item.book.author }}</p>
                     </div>
                   </div>
-                </th>
+                </td>
 
                 <td class="align-middle">
                     <div class="d-flex flex-row">
@@ -77,7 +77,7 @@
                     <a href="{% url 'index' %}" class="btn btn-success">Wróc do zakupów</a>
                 </td>
                 <td>
-                    <a href="{% url 'delivery_form' %}" class="btn btn-success">Przejdź do dostawy</a>
+                    <a href="{% url 'delivery_form' order_id  %}" class="btn btn-success">Przejdź do dostawy</a>
                 </td>
                 <td><p id="totalCart">${{ total_cost }}</p></td>
               </tr>
