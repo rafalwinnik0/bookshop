@@ -186,5 +186,7 @@ def fill_address(request):
 
 @login_required()
 def account(request):
-    return render(request, 'myapp/account.html')
+    user_addresses = UserProfile.objects.filter(user=request.user).prefetch_related('useraddress_set')
+    user_orders = Order.objects.filter(user=request.user, status='cancelled').prefetch_related('orderitem_set')
+    return render(request, 'myapp/account.html', {'user_addresses': user_addresses, 'user_orders': user_orders})
 

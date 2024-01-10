@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+    <h2>Adresy dostaw</h2>
+    {% for address in user_addresses %}
+        <div class="card mb-3">
+        {% for item in address.useraddress_set.all %}
+            <div class="card-header">
+                Adres #{{ forloop.counter }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">Adres: {{ item.address.address }}</p>
+                <p class="card-text">Country: {{ item.address.country }}</p>
+            </div>
+        {% endfor %}
+        </div>
+    {% empty %}
+        <p>Brak zapisanych adresów.</p>
+    {% endfor %}
+
+    <h2>Historia zamówień</h2>
+    {% for order in user_orders %}
+        <div class="card mb-3">
+            <div class="card-header">
+                Zamówienie #{{ order.id }}
+            </div>
+            <div class="card-body">
+                {% for item in order.orderitem_set.all %}
+                    <p>{{ item.book.title }} - Ilość: {{ item.quantity }}</p>
+                {% endfor %}
+                <!-- Dodatkowe informacje o zamówieniu -->
+            </div>
+        </div>
+    {% empty %}
+        <p>Brak historii zamówień.</p>
+    {% endfor %}
+{% endblock %}
+
