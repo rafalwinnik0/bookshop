@@ -3,15 +3,75 @@
 <div class="container mt-4">
     <h2>Adresy użytkownika</h2>
     {% for user_address in addresses %}
-        <div class="card mb-3">
-            <div class="card-header">Adres #{{ forloop.counter }}</div>
-            <div class="card-body">
-                <h5 class="card-title">Adres: {{ user_address.address.address }}</h5>
-                <p class="card-text">Kod pocztowy: {{ user_address.address.zip_code }}</p>
-                <p class="card-text">Kraj: {{ user_address.address.country }}</p>
+        <div id="address-{{ user_address.address.id }}" class="row align-items-center">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-header">Adres #{{ forloop.counter }}</div>
+                    <div class="card-body">
+                        <h5 id="address-{{ user_address.address.id }}-adres" class="card-title">Adres: {{ user_address.address.address }}</h5>
+                        <p id="address-{{ user_address.address.id }}-kod" class="card-text">Kod pocztowy: {{ user_address.address.zip_code }}</p>
+                        <p id="address-{{ user_address.address.id }}-kraj" class="card-text">Kraj: {{ user_address.address.country }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-secondary edit-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editAddressModal"
+                        data-first-name="{{ user_address.address.first_name }}"
+                        data-last-name="{{ user_address.address.last_name }}"
+                        data-address="{{ user_address.address.address }}"
+                        data-zip="{{ user_address.address.zip_code }}"
+                        data-country="{{ user_address.address.country }}"
+                        data-id="{{ user_address.address.id }}"><i class="fas fa-edit"></i>
+                </button>
+                {{ user_address.address.id }}
+                <button onClick="removeAddress({{ user_address.address.id }})" class="btn btn-danger"><i class="fas fa-trash"></i></button>
             </div>
         </div>
     {% endfor %}
 </div>
 
+<div class="modal fade" id="editAddressModal" tabindex="-1" role="dialog" aria-labelledby="editAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAddressModalLabel">Edytuj adres</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modalAddressId">
+                <div class="form-group">
+                    <label for="modalFirstName">Imię</label>
+                    <input type="text" class="form-control" id="modalFirstName">
+                </div>
+                <div class="form-group">
+                    <label for="modalLastName">Nazwisko</label>
+                    <input type="text" class="form-control" id="modalLastName">
+                </div>
+                <div class="form-group">
+                    <label for="modalAddress">Adres</label>
+                    <input type="text" class="form-control" id="modalAddress">
+                </div>
+                <div class="form-group">
+                    <label for="modalZip">Kod Pocztowy</label>
+                    <input type="text" class="form-control" id="modalZip">
+                </div>
+                <div class="form-group">
+                    <label for="modalCountry">Kraj</label>
+                    <input type="text" class="form-control" id="modalCountry">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-primary" id="saveChangesButton">Zapisz zmiany</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+

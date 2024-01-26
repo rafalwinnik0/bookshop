@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Book, Order, OrderItem, UserProfile, UserAddress
+from .models import Book, Order, OrderItem, UserProfile, UserAddress, Address
 from .forms import UserRegistrationForm, BookForm, AddressForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -58,6 +58,33 @@ def edit_book(request, book_id):
     return render(request, 'myapp/edit_book.html', {'form': form, 'book': book})
 
 
+@login_required
+def update_address(request):
+    if request.method == 'POST':
+        address_id = request.POST.get('address_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        address = request.POST.get('address')
+        zip_code = request.POST.get('zip_code')
+        country = request.POST.get('country')
+
+        try:
+            addr = Address.objects.get(id=address_id)
+            addr.first_name = first_name
+            addr.last_name = last_name
+            addr.address = address
+            addr.zip_code = zip_code
+            addr.country = country
+            addr.save()
+            return JsonResponse({'success': True,
+                                 'zip_code': zip_code,
+                                 'address': address,
+                                 'country': country,
+                                 'address_id': address_id})
+        except Address.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Address not found'})
+
+
 @login_required()
 @require_POST
 def add_to_cart(request, book_id):
@@ -110,6 +137,18 @@ def remove_from_cart(request, item_id):
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request'})
 
+@login_required
+def remove_address(request, address_id):
+    print(address_id)
+    try:
+        address = Address.objects.get(id=address_id)
+        user_address = UserAddress.objects.get(address=address)
+        address.delete()
+        user_address.delete()
+        response_data = {'success': True}
+    except (UserAddress.DoesNotExist, Address.DoesNotExist):
+        response_data = {'success': False}
+    return JsonResponse(response_data)
 
 @login_required
 def update_quantity(request, item_id):
@@ -175,7 +214,7 @@ def fill_address(request):
                     'first_name': user_address.address.first_name,
                     'last_name': user_address.address.last_name,
                     'address': user_address.address.address,
-                    'zip_code': user_address.address.address,
+                    'zip_code': user_address.address.zip_code,
                     'country': user_address.address.country,
                     }
     else:
