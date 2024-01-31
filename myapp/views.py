@@ -4,6 +4,7 @@ from .forms import UserRegistrationForm, BookForm, AddressForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.contrib.auth import login, authenticate
 import json
 
 
@@ -18,9 +19,17 @@ def index(request):
 def register(request):
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
-        new_user = user_form.save(commit=False)
-        new_user.set_password(user_form.cleaned_data['password'])
-        new_user.save()
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+
+            username = user_form.cleaned_data['username']
+            password = user_form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index')
+
     user_form = UserRegistrationForm()
     return render(request, 'myapp/register.html', {'user_form': user_form})
 
@@ -139,7 +148,6 @@ def remove_from_cart(request, item_id):
 
 @login_required
 def remove_address(request, address_id):
-    print(address_id)
     try:
         address = Address.objects.get(id=address_id)
         user_address = UserAddress.objects.get(address=address)
@@ -176,12 +184,17 @@ def delivery_form(request, order_id):
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
         if address_form.is_valid():
-            address = address_form.save()
-            user_profile, created = UserProfile.objects.get_or_create(user=request.user, defaults={})
-            user_address, created = UserAddress.objects.get_or_create(profile=user_profile,
-                                                                      address=address,
-                                                                      defaults={})
-            user_address.save()
+            address_data = address_form.cleaned_data
+            address, address_created = Address.objects.get_or_create(
+                first_name=address_data['first_name'],
+                last_name=address_data['last_name'],
+                address=address_data['address'],
+                zip_code=address_data['zip_code'],
+                country=address_data['country']
+            )
+            user_profile, profile_created = UserProfile.objects.get_or_create(user=request.user)
+            user_address, user_address_created = UserAddress.objects.get_or_create(profile=user_profile,
+                                                                                   address=address)
             order.status = 'cancelled'
             order.save()
             return redirect('index')
