@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 import json
 
 
@@ -92,6 +93,25 @@ def update_address(request):
                                  'address_id': address_id})
         except Address.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Address not found'})
+
+
+@login_required
+def update_account(request):
+    if request.method == 'POST':
+        new_first_name = request.POST.get('new_first_name')
+        new_last_name = request.POST.get('new_last_name')
+        new_username = request.POST.get('new_username')
+        new_email = request.POST.get('new_email')
+        user = User.objects.get(username=request.user.username)
+        user.username = new_username
+        user.email = new_email
+        user.first_name = new_first_name
+        user.last_name = new_last_name
+        user.save()
+        response = {'success': True}
+    else:
+        response = {'success': False}
+    return JsonResponse(response)
 
 
 @login_required()
@@ -241,4 +261,9 @@ def account(request):
     user_addresses = UserProfile.objects.filter(user=request.user).prefetch_related('useraddress_set')
     user_orders = Order.objects.filter(user=request.user, status='cancelled').prefetch_related('orderitem_set')
     return render(request, 'myapp/account.html', {'user_addresses': user_addresses, 'user_orders': user_orders})
+
+@login_required()
+def edit_account_data(request):
+    pass
+
 

@@ -454,7 +454,6 @@
         let editAddressModalEl = document.getElementById('editAddressModal');
         if (editAddressModalEl){
             let editAddressModal = new bootstrap.Modal(editAddressModalEl);
-
             let saveChangesButton = document.getElementById('saveChangesButton');
             if (saveChangesButton) {
                 saveChangesButton.addEventListener('click', function() {
@@ -465,6 +464,79 @@
         }
 
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let editAccountBtn = document.getElementById('edit-account-btn');
+        if (editAccountBtn) {
+            editAccountBtn.addEventListener('click', function(event) {
+                let firstName = this.getAttribute('data-first-name');
+                let lastName = this.getAttribute('data-last-name');
+                let email = this.getAttribute('data-email');
+                let username = this.getAttribute('data-username');
+
+                document.getElementById('modalAccountFirstName').value = firstName;
+                document.getElementById('modalAccountLastName').value = lastName;
+                document.getElementById('modalAccountUsername').value = username;
+                document.getElementById('modalAccountEmail').value = email;
+            })
+        }
+    });
+
+
+    function saveAccount() {
+        let newFirstName  = document.getElementById('modalAccountFirstName').value;
+        let newLastName  = document.getElementById('modalAccountLastName').value;
+        let newUsername  = document.getElementById('modalAccountUsername').value;
+        let newEmail  = document.getElementById('modalAccountEmail').value
+
+        fetch('/update-account/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: new URLSearchParams({
+                'new_first_name': newFirstName,
+                'new_last_name': newLastName,
+                'new_username': newUsername,
+                'new_email': newEmail
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('accountEmail').innerHTML = newEmail;
+                document.getElementById('accountUsername').innerHTML = newUsername;
+            }
+            else {
+                console.log('error');
+            }
+        })
+        .catch(error => {
+
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let editAccountModalEl = document.getElementById('editAccountModal');
+        if (editAccountModalEl){
+            let editAccountModal = new bootstrap.Modal(editAccountModalEl);
+            let saveAccountModalButton = document.getElementById('saveAccountModalButton');
+            if (saveAccountModalButton) {
+                saveAccountModalButton.addEventListener('click', function(event) {
+                    saveAccount();
+                    editAccountModal.hide();
+                })
+            }
+        }
+
+    });
+
+
+
+
+
+
 </script>
   </body>
 </html>

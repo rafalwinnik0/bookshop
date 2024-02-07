@@ -8,15 +8,62 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
                     class="rounded-circle img-fluid" style="width: 100px;" />
                 </div>
-                <h4 class="mb-2">{{ user.username }}</h4>
-                <p class="text-muted mb-4">{{ user.email }} <span class="mx-2">|</span>
+                <h4 id="accountUsername" class="mb-2">{{ user.username }}</h4>
+                <p id="accountEmail" class="text-muted mb-4">{{ user.email }} <span class="mx-2">|</span>
                 <small>Last login: {{ user.last_login }}</small></p>
-                <p><a href="{% url 'history' %}">Order's history</a> | <a href="{% url 'addresses'%}">Addresses</a></p>
+                <p>
+                    <a href="{% url 'history' %}">Order's history</a> |
+                    <a href="{% url 'addresses'%}">Addresses</a> |
+                    <a id="edit-account-btn"
+                       href="#"
+                       data-bs-toggle="modal"
+                       data-bs-target="#editAccountModal"
+                       data-username="{{ request.user.username }}"
+                       data-email="{{ request.user.email }}"
+                       data-first-name="{{ request.user.first_name }}"
+                       data-last-name="{{ request.user.last_name }}"
+                        >Edit information
+                    </a>
+                </p>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="editAccountModal" tabindex="-1" role="dialog" aria-labelledby="editAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editAccountModalLabel">Edit information</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modalAccountId">
+                <div class="form-group">
+                    <label for="modalAccountEmail">Email</label>
+                    <input type="text" class="form-control" id="modalAccountEmail">
+                </div>
+                <div class="form-group">
+                    <label for="modalAccountUsername">Last name</label>
+                    <input type="text" class="form-control" id="modalAccountUsername">
+                </div>
+                <div class="form-group">
+                    <label for="modalAccountFirstName">First name</label>
+                    <input type="text" class="form-control" id="modalAccountFirstName">
+                </div>
+                <div class="form-group">
+                    <label for="modalAccountLastName">Last name</label>
+                    <input type="text" class="form-control" id="modalAccountLastName">
+                </div>
 
-
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-primary" id="saveAccountModalButton">Zapisz zmiany</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

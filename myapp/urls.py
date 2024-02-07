@@ -25,6 +25,8 @@ urlpatterns = [
     path('account/', views.account, name='account'),
     path('remove-address/<int:address_id>/', views.remove_address, name='remove_address'),
     path('update-address/', views.update_address, name='update_address'),
+    path('edit-account-data/', views.edit_account_data, name='edit_account_data'),
+    path('update-account/', views.update_account, name='update_account'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
