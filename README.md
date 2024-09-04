@@ -24,15 +24,25 @@ The project includes the following models:
 To get started with this project:
 
 1. Clone the repository:
+```bash
   git clone https://github.com/rafalwinnik0/bookshop.git
-2. Install the required dependencies:
+```
+3. Install the required dependencies:
+```bash
   pip install -r requirements.txt
-3. Apply migrations:
+```
+5. Apply migrations:
+```bash
    python manage.py migrate
-4. Create superuser:
+```
+6. Create superuser:
+```bash
   python manage.py createsuperuser
-5. Run the development sercer:
+```
+8. Run the development sercer:
+```bash
   python manage.py runserver
+```
 
 ## Project Structure	
 
