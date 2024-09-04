@@ -50,3 +50,11 @@ To get started with this project:
 2. views.py: Contains the views for the application
 3. urls.py: Contains the URL configurations for the application
 4. tests.py: Contains the unit tests for the models
+
+## Running Tests
+
+To run the unit tests, use the following command:
+
+```bash
+  python manage.py test myapp
+```
