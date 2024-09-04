@@ -33,3 +33,9 @@ To get started with this project:
   python manage.py createsuperuser
 5. Run the development sercer:
   python manage.py runserver
+
+## Project Structure	
+•	models.py: Contains the Django models for the application.
+•	views.py: Contains the views for the application.
+•	urls.py: Contains the URL configurations for the application.
+•	tests.py: Contains the unit tests for the models.
