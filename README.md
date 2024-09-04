@@ -24,7 +24,7 @@ The project includes the following models:
 To get started with this project:
 
 1. Clone the repository:
-  git clone "https://github.com/rafalwinnik0/bookshop.git"
+  git clone https://github.com/rafalwinnik0/bookshop.git
 2. Install the required dependencies:
   pip install -r requirements.txt
 3. Apply migrations:
