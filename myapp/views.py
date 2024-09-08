@@ -266,4 +266,6 @@ def account(request):
 def edit_account_data(request):
     pass
 
+def account_locked(request):
+    return render(request, 'myapp/account-locked.html')
 

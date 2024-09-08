@@ -15,6 +15,7 @@ class BookModelTest(TestCase):
             file=None
         )
 
+
     def test_book_creation(self):
         self.assertEqual(self.book.title, "Test Book")
         self.assertEqual(self.book.author, "Test Author")
