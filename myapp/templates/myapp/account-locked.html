@@ -1,0 +1,14 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+<div class="container p-5 text-center">
+    <i class="fa fa-lock fa-4x text-dark" aria-hidden="True"></i>
+    <br><br>
+    <h2>Account locked</h2>
+    <br>
+    <p>You have been locked out of your account due to multiple failed login attemps</p>
+    <p>You may re-attempt to login to your account after the expiry period</p>
+    <br>
+    <a class="btn btn-danger" type="button" href="{% url 'index' %}" >Return to homepage</a>
+</div>
+
+{% endblock %}
