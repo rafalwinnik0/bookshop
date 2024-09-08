@@ -2,12 +2,14 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Book, Address
 
+from django_recaptcha.fields import ReCaptchaField
 
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'password']
 
+    captcha = ReCaptchaField()
 
 class BookForm(forms.ModelForm):
     class Meta:
