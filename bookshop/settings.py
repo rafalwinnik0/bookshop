@@ -39,17 +39,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django_recaptcha',
-    'axes',
+    # 'axes',
 
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
-    'axes.backends.AxesStandaloneBackend',
-
-    # Django ModelBackend is the default authentication backend.
-    'django.contrib.auth.backends.ModelBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+#     'axes.backends.AxesStandaloneBackend',
+#
+#     # Django ModelBackend is the default authentication backend.
+#     'django.contrib.auth.backends.ModelBackend',
+# ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'axes.middleware.AxesMiddleware',
+    # 'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = "bookshop.urls"
@@ -140,8 +140,8 @@ RECAPTCHA_PRIVATE_KEY = '6LdhRzcqAAAAAAamqXf-pg9YNupVwemgPEUJePOP'
 
 # Aces configuration
 
-AXES_FAILURE_LIMIT: 3  # How many times a user can fail a login
-AXES_COOLOFF_TIME: 2  # Wait 2 hours before attempting to login again
-AXES_RESET_ON_SUCCESS = True  # Reset failed login attemps after success login
-AXES_LOCKOUT_TEMPLATE = 'myapp/account-locked.html'
-AXES_LOCKOUT_PARAMETERS = ["username"]
+# AXES_FAILURE_LIMIT: 3  # How many times a user can fail a login
+# AXES_COOLOFF_TIME: 2  # Wait 2 hours before attempting to login again
+# AXES_RESET_ON_SUCCESS = True  # Reset failed login attemps after success login
+# AXES_LOCKOUT_TEMPLATE = 'myapp/account-locked.html'
+# AXES_LOCKOUT_PARAMETERS = ["username"]
