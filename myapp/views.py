@@ -1,19 +1,26 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Book, Order, OrderItem, UserProfile, UserAddress, Address
-from .forms import UserRegistrationForm, BookForm, AddressForm
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
+
+from django.core.paginator import Paginator
+
+from .models import Book, Order, OrderItem, UserProfile, UserAddress, Address
+from .forms import UserRegistrationForm, BookForm, AddressForm
+
 import json
 
 
 def index(request):
-    books = Book.objects.all()[:12]
+    books = Book.objects.all()
+    paginator = Paginator(books, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request,
                   'myapp/index.html',
-                  {'books': books})
+                  {'page_obj': page_obj})
 
 
 def register(request):
