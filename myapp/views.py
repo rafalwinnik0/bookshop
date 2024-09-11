@@ -10,11 +10,10 @@ import json
 
 
 def index(request):
-    books = Book.objects.all()
-    adam_mickiewicz_books = Book.objects.filter(author='Adam-Mickiewicz')
+    books = Book.objects.all()[:12]
     return render(request,
                   'myapp/index.html',
-                  {'books': books, 'Adam_Mickiewicz_books': adam_mickiewicz_books})
+                  {'books': books})
 
 
 def register(request):
