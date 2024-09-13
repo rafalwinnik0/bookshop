@@ -3,7 +3,7 @@
 <div class="container mt-4">
     <h2>Adresy użytkownika</h2>
     {% for user_address in addresses %}
-        <div id="address-{{ user_address.address.id }}" class="row align-items-center">
+        <div id="address-{{ user_address.address.id }}" class="row align-items-center w-75">
             <div class="col-md-8">
                 <div class="card mb-3">
                     <div class="card-header">Adres #{{ forloop.counter }}</div>
@@ -25,7 +25,6 @@
                         data-country="{{ user_address.address.country }}"
                         data-id="{{ user_address.address.id }}"><i class="fas fa-edit"></i>
                 </button>
-                {{ user_address.address.id }}
                 <button onClick="removeAddress({{ user_address.address.id }})" class="btn btn-danger"><i class="fas fa-trash"></i></button>
             </div>
         </div>

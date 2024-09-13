@@ -1,7 +1,7 @@
 {% extends 'myapp/base.html' %}
 {% block body %}
 <p>Order ID: {{ order_id }}</p>
-<p>Status: {{ status }}</p>
+<!--<p>Status: {{ status }}</p>-->
 <button onclick="fillAddress()" class="btn btn-warning">Domyślny adres</button>
 <div class="row d-flex justify-content-center">
     <div class="col-md-6">
@@ -28,7 +28,7 @@
                 <label for="country">Country:</label>
                 {{ form.country }}
             </div>
-        <button class="mt-3" type="submit">Gotowe</button>
+        <button class="btn btn-success mt-3" type="submit">Gotowe</button>
         </form>
     </div>
 </div>

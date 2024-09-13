@@ -62,16 +62,16 @@
         <table class="table table-hover">
             <tbody>
                 <tr>
-                    <td><a href="#">Przygodowe</a></td>
+                    <td><a href="{% url 'author_site' 'Baczynski' %}">Baczyński</a></td>
                 </tr>
                 <tr>
-                    <td><a href="#">Komedia</a></td>
+                    <td><a href="{% url 'author_site' 'Mickiewicz' %}">Mickiewicz</a></td>
                 </tr>
                 <tr>
-                    <td><a href="#">Science Fiction</a></td>
+                    <td><a href="{% url 'author_site' 'Sienkiewicz' %}">Sienkiewicz</a></td>
                 </tr>
                 <tr>
-                    <td><a href="#">Historyczne</a></td>
+                    <td><a href="{% url 'author_site' 'Skarga' %}">Skarga</a></td>
                 </tr>
             </tbody>
         </table>
@@ -131,7 +131,7 @@
 
 
     <div class="col-9 text-center py-3">
-        <div class="row row-cols-3 g-4">
+        <div class="row row-cols-4 g-4">
             {% for book in page_obj %}
             <div class="card">
                 <a href="{% url 'show_book' book.id %}">

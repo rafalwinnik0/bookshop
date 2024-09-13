@@ -15,7 +15,7 @@ import json
 
 def index(request):
     books = Book.objects.all()
-    paginator = Paginator(books, 6)
+    paginator = Paginator(books, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,
@@ -60,7 +60,10 @@ def show_book(request, book_id):
 
 def author_site(request, author):
     books = Book.objects.filter(author=author)
-    return render(request, 'myapp/author_site.html', {'books': books, 'author': author})
+    paginator = Paginator(books, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'myapp/author_site.html', {'page_obj': page_obj, 'author': author})
 
 
 def edit_book(request, book_id):
