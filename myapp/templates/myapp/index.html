@@ -133,17 +133,23 @@
     <div class="col-9 text-center py-3">
         <div class="row row-cols-4 g-4">
             {% for book in page_obj %}
-            <div class="card">
+            <div class="card d-flex flex-column" style="border:none;">
                 <a href="{% url 'show_book' book.id %}">
                     <img src="{{ book.file.url }}" class="card-img-top" alt="" style="width: 80%;" >
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">{{book.title}}</h5>
-                    <p class="card-text">   <a href="{% url 'author_site' book.author %}">{{ book.author }}</a></p>
+                <div class="text-start py-2">
+                    <h5 class="card-subtitle fw-bold fs-6">{{book.title}}</h5>
+                    <p class="card-subtitle">
+                        <a style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
+                    </p>
+                    <p class="card-subtitle fw-bold fs-5">{{ book.price }} zł</p>
                 </div>
-                <div class="card-footer d-grid">
-                    <button onclick="addToCart({{ book.id }})" class="btn btn-success mt-auto">${{ book.price }}</button>
-                </div>
+
+                    <button onclick="addToCart({{ book.id }})" class="btn btn-sm btn-cart text-nowrap mt-auto">
+                        Dodaj do koszyka
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
+
             </div>
             {% endfor %}
 
