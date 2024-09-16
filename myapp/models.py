@@ -2,6 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Genre(models.Model):
+    AKC = 'akcja'
+    PRZ = 'przygoda'
+    HIS = 'historia'
+    KOM = 'komedia'
+    BOOK_GENRE = [
+        (AKC, 'Akcja'),
+        (PRZ, 'Przygoda'),
+        (HIS, 'Historia'),
+        (KOM, 'Komedia')
+    ]
+    name = models.CharField(max_length=15, choices=BOOK_GENRE, default=AKC)
+
+    def __str__(self):
+        return self.name
+
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100, blank=True)
@@ -10,6 +27,7 @@ class Book(models.Model):
     file = models.ImageField(upload_to='uploads', blank=True)
     created = models.DateField(auto_now_add=True)
     modified = models.DateField(auto_now=True)
+    genres = models.ManyToManyField(Genre, blank=True)
 
     def __str__(self):
         return self.title
