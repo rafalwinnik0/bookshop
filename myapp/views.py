@@ -19,7 +19,7 @@ def index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,
-                  'myapp/index.html',
+                  'myapp/testing.html',
                   {'page_obj': page_obj})
 
 
@@ -175,6 +175,7 @@ def remove_from_cart(request, item_id):
     else:
         return JsonResponse({'success': False, 'error': 'Invalid request'})
 
+
 @login_required
 def remove_address(request, address_id):
     try:
@@ -186,6 +187,7 @@ def remove_address(request, address_id):
     except (UserAddress.DoesNotExist, Address.DoesNotExist):
         response_data = {'success': False}
     return JsonResponse(response_data)
+
 
 @login_required
 def update_quantity(request, item_id):
@@ -271,10 +273,11 @@ def account(request):
     user_orders = Order.objects.filter(user=request.user, status='cancelled').prefetch_related('orderitem_set')
     return render(request, 'myapp/account.html', {'user_addresses': user_addresses, 'user_orders': user_orders})
 
+
 @login_required()
 def edit_account_data(request):
     pass
 
+
 def account_locked(request):
     return render(request, 'myapp/account-locked.html')
-
