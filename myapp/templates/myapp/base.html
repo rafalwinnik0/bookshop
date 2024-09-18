@@ -30,12 +30,9 @@
         --bs-btn-disabled-bg: #198754;
         --bs-btn-disabled-border-color: #198754;
     }
-
     .dropdown:hover .dropdown-menu-nav {
       display: block;
     }
-
-
     </style>
     <body>
         <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -53,91 +50,60 @@
                 <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
             </symbol>
         </svg>
+<!--    NAVBAR-->
+        <div class="navbar bg-body-tertiary fixed-top">
+            <div class="container-fluid d-flex justify-content-between">
+                <div class="">
+                    <a class="navbar-brand" href="{% url 'index' %}">
+                        <img src="{% static 'navbar_img.png' %}" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
+                        BOOKSHOP
+                    </a>
 
-<!--      NAVBAR-->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}">
-                    <img src="{% static 'navbar_img.png' %}" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
-                    BOOKSHOP
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-
-        <!--      OFFCANVAS-->
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                KONTO
-                                </a>
-                                <ul class="dropdown-menu">
-                                    {% if not user.is_authenticated %}
-                                    <li><a class="dropdown-item" href="{% url 'register' %}">Zarejestruj</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'login' %}">Zaloguj</a></li>
-                                    {% endif %}
-                                    {% if user.is_authenticated %}
-                                    <li><a class="dropdown-item" href="{% url 'account' %}">Konto</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'history' %}">Historia</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'addresses' %}">Adresy</a></li>
-                                    <li>
-                                        <form action="{% url 'logout' %}" method="post">
-                                            {% csrf_token %}
-                                            <button type="submit" class="dropdown-item">Wyloguj</button>
-                                        </form>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </li>
-                            {% if user.is_superuser %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                KSIĄŻKI
-                                </a>
-                                <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'add_book' %}">DODAJ</a></li>
-                                </ul>
-                            </li>
-                            {% endif %}
-                        </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="SZUKAJ" aria-label="Search">
-                            <button class="btn" type="submit">
-                            <img src="{% static 'search_icon.png' %}" width="27" height="27" class="rounded-circle">
-                            </button>
-                        </form>
-                    </div>
                 </div>
-        <!--    END OFFCANVAS-->
-
-        <!--     SIGN CART-->
-                {% if user.is_authenticated %}
-                <a class="navbar-brand" href="{% url 'cart' %}">
-        <!--        <img src="{% static 'user_icon.png' %}" alt="logo" width="30" height="24" class="d-inline-block align-text-top">-->
-                    <i class="fa fa-shopping-cart" style="color:#ffa500;"></i>
-                </a>
-                {% endif %}
-        <!--    END SIGN CART-->
-
-        <!--    LOGO SIGN-->
-                {% if user.is_authenticated %}
-                <a class="navbar-brand" href="{% url 'account' %}">
-                    <i class="fa fa-user"></i>
-                    {{ user.username }}</a>
-                {% endif %}
-        <!--    END LOGO SIGN-->
-
+                <div class="">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="SZUKAJ" aria-label="Search">
+                        <button class="btn" type="submit">
+                        <img src="{% static 'search_icon.png' %}" width="27" height="27" class="rounded-circle">
+                        </button>
+                    </form>
+                </div>
+                <div class="dropdown">
+                    {% if user.is_authenticated %}
+                    <a class="navbar-brand dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        {{ user.username }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="{% url 'account' %}">Konto</a></li>
+                        <li><a class="dropdown-item" href="{% url 'history' %}">Historia</a></li>
+                        <li><a class="dropdown-item" href="{% url 'addresses' %}">Adresy</a></li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">Wyloguj</button>
+                            </form>
+                        </li>
+                    </ul>
+                    <a class="navbar-brand" href="{% url 'cart' %}">
+                        <i class="fa fa-shopping-cart" style="color:#ffa500;"></i>
+                    </a>
+                    {% else %}
+                    <a class="navbar-brand dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'register' %}">Zarejestruj</a></li>
+                        <li><a class="dropdown-item" href="{% url 'login' %}">Zaloguj</a></li>
+                    </ul>
+                    <a class="navbar-brand">
+                        <i class="fa fa-shopping-cart" style="color:#ffa500;"></i>
+                    </a>
+                    {% endif %}
+                </div>
             </div>
-        </nav>
-<!--END NAVBAR-->
-
+        </div>
+<!--    END NAVBAR-->
 
 <!--      THEME MODE-->
         <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">

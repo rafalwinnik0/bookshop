@@ -155,31 +155,6 @@
             <div class="col">X</div>
         </div>
     </div>
-
-<!--CARDS WITHOUT PAGINATIONS-->
-
-<!--    <div class="col-9 text-center py-3">-->
-<!--        <div class="row row-cols-4 g-4">-->
-<!--            {% for book in books %}-->
-<!--            <div class="card">-->
-<!--                <a href="{% url 'show_book' book.id %}">-->
-<!--                    <img src="{{ book.file.url }}" class="card-img-top" alt="" style="width: 80%;" >-->
-<!--                </a>-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">{{book.title}}</h5>-->
-<!--                    <p class="card-text">   <a href="{% url 'author_site' book.author %}">{{ book.author }}</a></p>-->
-<!--                </div>-->
-<!--                <div class="card-footer d-grid">-->
-<!--                    <button onclick="addToCart({{ book.id }})" class="btn btn-success mt-auto">${{ book.price }}</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            {% endfor %}-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--END OF CARDS WITHOUT PAGINATIONS-->
-
-
     <div class="col-9 text-center py-3">
         <div class="row row-cols-4 g-4">
             {% for book in page_obj %}
@@ -198,10 +173,8 @@
                     Dodaj do koszyka
                     <i class="fa fa-shopping-cart"></i>
                 </button>
-
             </div>
             {% endfor %}
-
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center py-3">
@@ -241,31 +214,5 @@
             </ul>
         </nav>
     </div>
-<!--LU-->
-<!--    <div class="col-9 text-center py-3">-->
-<!--        <div class="row  row-cols-lg-8 row-cols-md-5 row-cols-sm-3 g-4">-->
-<!--            {% for book in books %}-->
-<!--            <div class="col">-->
-<!--                <div class="card h-100 " style="width: 8rem;">-->
-<!--                    <a href="{% url 'show_book' book.id %}">-->
-<!--                        {% if book.file %}-->
-<!--                        <img src="{{ book.file.url }}" class="card-img-top" alt="..." >-->
-<!--                        {% endif %}-->
-<!--                    </a>-->
-<!--                    <div class="card-body d-flex flex-column text-center">-->
-<!--                        <h5 class="card-title">{{ book.title }}</h5>-->
-
-<!--                        {% if book.author %}-->
-<!--                            <a href="{% url 'author_site' book.author %}"> {{ book.author }} </a>-->
-<!--                        {% endif %}-->
-
-<!--                        <button onclick="addToCart({{ book.id }})" class="btn btn-success mt-auto">${{ book.price }}</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            {% endfor %}-->
-<!--        </div>-->
-<!--    </div>-->
-
 </div>
 {% endblock %}
