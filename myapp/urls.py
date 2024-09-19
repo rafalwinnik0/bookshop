@@ -28,6 +28,7 @@ urlpatterns = [
     path('edit-account-data/', views.edit_account_data, name='edit_account_data'),
     path('update-account/', views.update_account, name='update_account'),
     path('account-locked/', views.account_locked, name='account_locked'),
+    path('search/', views.search_in_database, name='search_in_database')
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

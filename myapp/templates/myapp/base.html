@@ -33,6 +33,18 @@
     .dropdown:hover .dropdown-menu-nav {
       display: block;
     }
+    .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 35%;
+    width: 30%;
+    max-height: 200px;
+    overflow-y: auto;
+    }
+    .dropdown-item {
+        cursor: pointer;
+        padding: 8px 16px;
+    }
     </style>
     <body>
         <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -61,8 +73,8 @@
 
                 </div>
                 <div class="">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="SZUKAJ" aria-label="Search">
+                    <form class="d-flex" role="search" id="searchForm">
+                        <input id="navBarSearchInput" class="form-control me-2" type="text" placeholder="SZUKAJ" aria-label="Search">
                         <button class="btn" type="submit">
                         <img src="{% static 'search_icon.png' %}" width="27" height="27" class="rounded-circle">
                         </button>

@@ -285,3 +285,54 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('navBarSearchInput');
+    const dropdownMenu = document.createElement('ul');
+    dropdownMenu.classList.add('dropdown-menu');
+    searchInput.parentNode.appendChild(dropdownMenu);  // Dodajemy dynamicznie dropdown
+
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value;
+
+        if (query.length > 0) {
+            fetch(`/search/?q=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                // Oczyszczenie dropdowna z poprzednich wyników
+                dropdownMenu.innerHTML = '';
+
+                if (data.length > 0) {
+                    // Dodanie wyników do dropdowna
+                    data.forEach(book => {
+                        const listItem = document.createElement('li');
+                        listItem.classList.add('dropdown-item');
+                        listItem.textContent = `${book.title} - ${book.author}`;
+                        dropdownMenu.appendChild(listItem);
+                    });
+                } else {
+                    const noResults = document.createElement('li');
+                    noResults.classList.add('dropdown-item');
+                    noResults.textContent = 'Brak wyników';
+                    dropdownMenu.appendChild(noResults);
+                }
+                // Pokaż dropdown
+                dropdownMenu.classList.add('show');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        } else {
+            // Ukryj dropdown, jeśli input jest pusty
+            dropdownMenu.classList.remove('show');
+            dropdownMenu.innerHTML = '';
+        }
+    });
+
+    // Ukryj dropdown, jeśli klikniemy gdzieś poza nim
+    document.addEventListener('click', function(event) {
+        if (!searchInput.contains(event.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+});

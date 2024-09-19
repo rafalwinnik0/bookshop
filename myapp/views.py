@@ -281,3 +281,13 @@ def edit_account_data(request):
 
 def account_locked(request):
     return render(request, 'myapp/account-locked.html')
+
+
+def search_in_database(request):
+    query = request.GET.get('q', '')
+    if query:
+        books = Book.objects.filter(title__startswith=query)
+        books_data = list(books.values('title', 'author', 'price', 'file'))
+        return JsonResponse(books_data, safe=False)
+    return JsonResponse([], safe=False)
+
