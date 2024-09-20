@@ -2,20 +2,54 @@
 {% load static %}
 {% block body %}
 
-<div class="row row-cols-4 py-2">
-    <div class="col d-flex align-items-center justify-content-center">
-        <i class="fa fa-book fa-2x" aria-hidden="True"></i> Polska literatura
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+            Usługi
+          </a>
+          <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+            <div class="row">
+              <div class="col-md-4">
+                <h6>Kategoria 1</h6>
+                <ul class="list-unstyled">
+                  <li><a class="dropdown-item" href="#">Link 1</a></li>
+                  <li><a class="dropdown-item" href="#">Link 2</a></li>
+                  <li><a class="dropdown-item" href="#">Link 3</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h6>Kategoria 2</h6>
+                <ul class="list-unstyled">
+                  <li><a class="dropdown-item" href="#">Link 4</a></li>
+                  <li><a class="dropdown-item" href="#">Link 5</a></li>
+                  <li><a class="dropdown-item" href="#">Link 6</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h6>Kategoria 3</h6>
+                <ul class="list-unstyled">
+                  <li><a class="dropdown-item" href="#">Link 7</a></li>
+                  <li><a class="dropdown-item" href="#">Link 8</a></li>
+                  <li><a class="dropdown-item" href="#">Link 9</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="col d-flex align-items-center justify-content-center">
-        <i class="fa fa-bus fa-2x" aria-hidden="True"></i> Dostawa zagraniczna
-    </div>
-    <div class="col d-flex align-items-center justify-content-center">
-        <i class="fa fa-shopping-bag fa-2x" aria-hidden="True"></i> 15 dni na zwrot
-    </div>
-    <div class="col d-flex align-items-center justify-content-center">
-        <i class="fa fa-phone fa-2x" aria-hidden="True"></i> Infolinia 9:00 - 17:00
-    </div>
-</div>
+  </div>
+</nav>
 
 <div id="carouselExampleCaptions" class="carousel slide mx-auto py-3">
     <div class="carousel-indicators">
@@ -56,51 +90,24 @@
     </button>
 </div>
 
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
-            Usługi
-          </a>
-          <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
-            <div class="row">
-              <div class="col-md-4">
-                <h6>Kategoria 1</h6>
-                <ul class="list-unstyled">
-                  <li><a class="dropdown-item" href="#">Link 1</a></li>
-                  <li><a class="dropdown-item" href="#">Link 2</a></li>
-                  <li><a class="dropdown-item" href="#">Link 3</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <h6>Kategoria 2</h6>
-                <ul class="list-unstyled">
-                  <li><a class="dropdown-item" href="#">Link 4</a></li>
-                  <li><a class="dropdown-item" href="#">Link 5</a></li>
-                  <li><a class="dropdown-item" href="#">Link 6</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <h6>Kategoria 3</h6>
-                <ul class="list-unstyled">
-                  <li><a class="dropdown-item" href="#">Link 7</a></li>
-                  <li><a class="dropdown-item" href="#">Link 8</a></li>
-                  <li><a class="dropdown-item" href="#">Link 9</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-  </div>
-</nav>
-
+<div class="row row-cols-4 py-2">
+    <div class="col d-flex align-items-center justify-content-center">
+<!--        <i class="fa fa-book fa-2x" style="color:red" aria-hidden="True"></i> Polska literatura-->
+        <img width="70" height="70" src="{% static 'icons8-sale-100.png' %}" alt="sale-price-tag"/> Promocje
+    </div>
+    <div class="col d-flex align-items-center justify-content-center">
+<!--        <i class="fa fa-bus fa-2x" style="color:red" aria-hidden="True"></i> Dostawa zagraniczna-->
+        <img width="70" height="70" src="{% static 'icons8-time-100.png' %}" alt="sale-price-tag"/>Dostawa w 24h
+    </div>
+    <div class="col d-flex align-items-center justify-content-center">
+<!--        <i class="fa fa-shopping-bag fa-2x" style="color:red" aria-hidden="True"></i> 14 dni na zwrot-->
+        <img width="70" height="70" src="{% static 'icons8-return-100.png' %}" alt="sale-price-tag"/> 14 dni na zwrot
+    </div>
+    <div class="col d-flex align-items-center justify-content-center">
+<!--        <i class="fa fa-phone fa-2x" style="color:red" aria-hidden="True"></i> Infolinia 9:00 - 17:00-->
+        <img width="70" height="70" src="{% static 'icons8-phone-100.png' %}" alt="sale-price-tag"/> Infolinia 9:00-17:00
+    </div>
+</div>
 
 <div class="row">
     <div class="col-3 text-center py-3">
@@ -108,16 +115,16 @@
         <table class="table table-hover">
             <tbody>
                 <tr>
-                    <td><a href="{% url 'author_site' 'Baczynski' %}">Baczyński</a></td>
+                    <td><a class="custom-link" href="{% url 'author_site' 'Baczynski' %}">Baczyński</a></td>
                 </tr>
                 <tr>
-                    <td><a href="{% url 'author_site' 'Mickiewicz' %}">Mickiewicz</a></td>
+                    <td><a class="custom-link" href="{% url 'author_site' 'Mickiewicz' %}">Mickiewicz</a></td>
                 </tr>
                 <tr>
-                    <td><a href="{% url 'author_site' 'Sienkiewicz' %}">Sienkiewicz</a></td>
+                    <td><a class="custom-link" href="{% url 'author_site' 'Sienkiewicz' %}">Sienkiewicz</a></td>
                 </tr>
                 <tr>
-                    <td><a href="{% url 'author_site' 'Skarga' %}">Skarga</a></td>
+                    <td><a class="custom-link" href="{% url 'author_site' 'Skarga' %}">Skarga</a></td>
                 </tr>
             </tbody>
         </table>

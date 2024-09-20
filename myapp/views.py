@@ -19,7 +19,7 @@ def index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request,
-                  'myapp/testing.html',
+                  'myapp/index.html',
                   {'page_obj': page_obj})
 
 
@@ -287,7 +287,7 @@ def search_in_database(request):
     query = request.GET.get('q', '')
     if query:
         books = Book.objects.filter(title__startswith=query)
-        books_data = list(books.values('title', 'author', 'price', 'file'))
+        books_data = list(books.values('id' , 'title', 'author', 'price', 'file'))
         return JsonResponse(books_data, safe=False)
     return JsonResponse([], safe=False)
 

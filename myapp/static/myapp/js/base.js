@@ -299,15 +299,50 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/search/?q=${query}`)
             .then(response => response.json())
             .then(data => {
-                // Oczyszczenie dropdowna z poprzednich wyników
                 dropdownMenu.innerHTML = '';
-
                 if (data.length > 0) {
-                    // Dodanie wyników do dropdowna
                     data.forEach(book => {
                         const listItem = document.createElement('li');
                         listItem.classList.add('dropdown-item');
-                        listItem.textContent = `${book.title} - ${book.author}`;
+
+                        const link = document.createElement('a');
+                        link.classList.add('text-decoration-none');
+                        link.href = `/${book.id}/`;
+                        link.style.display = 'flex';
+                        link.style.alignItems = 'center';
+
+                        const image = document.createElement('img');
+                        image.src = book.file;
+                        image.alt = `${book.title} cover`;
+                        image.style.width = '50px';
+                        image.style.marginRight = '10px';
+
+                        const textContainer = document.createElement('div');
+                        textContainer.classList.add('custom-link');
+
+
+                        const title = document.createElement('h6');
+                        title.textContent = book.title;
+                        title.style.margin = '0';
+
+                        const author = document.createElement('p');
+                        author.textContent = book.author;
+                        author.style.margin = '0';
+
+                        const price = document.createElement('p');
+                        price.textContent = `Cena: ${book.price} zł`;
+                        price.style.fontWeight = 'bold';
+                        price.style.margin = '0';
+
+                        textContainer.appendChild(title);
+                        textContainer.appendChild(author);
+                        textContainer.appendChild(price);
+
+                        link.appendChild(image);
+                        link.appendChild(textContainer);
+
+                        listItem.appendChild(link);
+
                         dropdownMenu.appendChild(listItem);
                     });
                 } else {
@@ -316,6 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     noResults.textContent = 'Brak wyników';
                     dropdownMenu.appendChild(noResults);
                 }
+
                 // Pokaż dropdown
                 dropdownMenu.classList.add('show');
             })
@@ -331,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ukryj dropdown, jeśli klikniemy gdzieś poza nim
     document.addEventListener('click', function(event) {
-        if (!searchInput.contains(event.target)) {
+        if (!searchInput.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownMenu.classList.remove('show');
         }
     });
