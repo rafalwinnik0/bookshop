@@ -13,7 +13,6 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
 function addToCart(bookId) {
     fetch('/add-to-cart/' + bookId + '/', {
         method: 'POST',
@@ -37,7 +36,6 @@ function addToCart(bookId) {
         console.error('Error:', error);
     });
 }
-
 
 function removeFromCart(itemId) {
     let totalPrice = document.getElementById('totalCart');
@@ -64,7 +62,6 @@ function removeFromCart(itemId) {
     });
 }
 
-
 function removeAddress(addressId) {
     fetch('/remove-address/' + addressId + '/', {
         method: 'POST',
@@ -87,7 +84,6 @@ function removeAddress(addressId) {
         }
     });
 }
-
 
 function changeQuantity(button, change) {
     let itemId = button.getAttribute('data-item-id');
@@ -120,7 +116,6 @@ function changeQuantity(button, change) {
         });
     }
 }
-
 
 function fillAddress() {
     fetch('/fill-address/', {
@@ -235,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 });
-
 
 function saveAccount() {
     let newFirstName  = document.getElementById('modalAccountFirstName').value;
@@ -372,3 +366,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function showFormResults () {
+    let checkboxes = document.querySelectorAll('.form-check-input');
+
+    let checkedValues = [];
+    checkboxes.forEach(function(checkbox) {
+//        console.log(checkbox.value);
+//        console.log(checkbox.id);
+        if (checkbox.checked) {
+            checkedValues.push(checkbox.id);
+        }
+    });
+//    checkedValues.forEach(function(par){
+//        console.log(par)
+//    });
+    let data = {
+        checkedValues: checkedValues
+    };
+    let minRange = document.getElementById('minRange').value;
+    let maxRange = document.getElementById('maxRange').value;
+    if (minRange.trim() !== "") {
+        data.minRange = minRange;
+    }
+    if (maxRange.trim() !== "") {
+        data.maxRange = maxRange;
+    }
+    console.log(data);
+    fetch('/search-based-on-filter/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+//    .then(response => response.json())
+//    .then(data => {
+//        console.log('Success:', data);
+//    })
+//    .catch((error) => {
+//        console.error('Error:', error);
+//    });
+
+}
+
+

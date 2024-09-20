@@ -291,3 +291,25 @@ def search_in_database(request):
         return JsonResponse(books_data, safe=False)
     return JsonResponse([], safe=False)
 
+
+def search_based_on_filter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        checked_values = data.get('checkedValues', [])
+        min_range = int(data.get('minRange', None))
+        max_range = int(data.get('maxRange', None))
+        books_in_range = Book.objects.filter(price__range=(min_range, max_range))
+        for book in books_in_range:
+            print(f"Book: {book.title}, price: {book.price}")
+        # books_more_expensive = Book.objects.filter(price__gte=min_range)
+        # books_in_range_and_action = Book.objects.filter(price__range=(min_range, max_range), genres__name='akcja')
+        # books = Book.objects.all()
+        # paginator = Paginator(books_in_range, 8)
+        # page_number = request.GET.get('page')
+        # page_obj = paginator.get_page(page_number)
+        # return render(request, 'myapp/testing.html', {'books_in_range': books_in_range})
+        return render(request, 'myapp/author_site.html', {'page_obj': books_in_range, 'author': 'Mickiewicz'})
+        # return JsonResponse({'response': True})
+
+    #     return JsonResponse({'message': 'Data received successfully', 'checked_values': checked_values, 'min_range': min_range, 'max_range': max_range})
+    # return JsonResponse({'error': 'Invalid request method'}, status=400)
