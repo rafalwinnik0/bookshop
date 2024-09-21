@@ -372,27 +372,25 @@ function showFormResults () {
 
     let checkedValues = [];
     checkboxes.forEach(function(checkbox) {
-//        console.log(checkbox.value);
-//        console.log(checkbox.id);
         if (checkbox.checked) {
             checkedValues.push(checkbox.id);
         }
     });
-//    checkedValues.forEach(function(par){
-//        console.log(par)
-//    });
+
     let data = {
         checkedValues: checkedValues
     };
+
     let minRange = document.getElementById('minRange').value;
     let maxRange = document.getElementById('maxRange').value;
+
     if (minRange.trim() !== "") {
         data.minRange = minRange;
     }
     if (maxRange.trim() !== "") {
         data.maxRange = maxRange;
     }
-    console.log(data);
+
     fetch('/search-based-on-filter/', {
         method: 'POST',
         headers: {
@@ -401,14 +399,22 @@ function showFormResults () {
         },
         body: JSON.stringify(data)
     })
-//    .then(response => response.json())
-//    .then(data => {
-//        console.log('Success:', data);
-//    })
-//    .catch((error) => {
-//        console.error('Error:', error);
-//    });
-
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log("Otrzymano odpowiedź od serwera");
+            const booksContainer = document.getElementById('books-container');
+            if (booksContainer) {
+                booksContainer.innerHTML = '';
+                console.log("Zawartość books-container została wyczyszczona");
+            } else {
+                console.error("Element o ID 'books-container' nie istnieje");
+            }
+        } else {
+            console.log("Wystąpił błąd po stronie serwera");
+        }
+    })
+    .catch((error) => {
+        console.error('Błąd podczas wysyłania danych:', error);
+    });
 }
-
-

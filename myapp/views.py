@@ -301,15 +301,15 @@ def search_based_on_filter(request):
         books_in_range = Book.objects.filter(price__range=(min_range, max_range))
         for book in books_in_range:
             print(f"Book: {book.title}, price: {book.price}")
-        # books_more_expensive = Book.objects.filter(price__gte=min_range)
-        # books_in_range_and_action = Book.objects.filter(price__range=(min_range, max_range), genres__name='akcja')
-        # books = Book.objects.all()
-        # paginator = Paginator(books_in_range, 8)
-        # page_number = request.GET.get('page')
-        # page_obj = paginator.get_page(page_number)
-        # return render(request, 'myapp/testing.html', {'books_in_range': books_in_range})
-        return render(request, 'myapp/author_site.html', {'page_obj': books_in_range, 'author': 'Mickiewicz'})
-        # return JsonResponse({'response': True})
+        books_data = []
+        for book in books_in_range:
+            books_data.append({
+                'title': book.title,
+                'author': book.author,
+                'price': book.price,
+                'file': book.file.url if book.file else '',
+                'description': book.description
+            })
+        print("finished")
+        return JsonResponse({'success': True})
 
-    #     return JsonResponse({'message': 'Data received successfully', 'checked_values': checked_values, 'min_range': min_range, 'max_range': max_range})
-    # return JsonResponse({'error': 'Invalid request method'}, status=400)
