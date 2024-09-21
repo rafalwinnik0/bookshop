@@ -114,55 +114,55 @@
         <div class="row text-start border border-secondary">
             <p class="text-start fs-4 fw-bold">Autorzy</p>
             <div class="text-start">
-                <label class="form-check-label" for="MickiewiczCheck">
+                <label class="form-check-label-author" for="Mickiewicz">
                 Mickiewicz
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="MickiewiczCheck">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Mickiewicz">
             </div>
             <div class="text-start">
-                <label class="form-check-label text-start" for="SkargaCheck">
+                <label class="form-check-label text-start" for="Skarga">
                 Skarga
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="SkargaCheck">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Skarga">
             </div>
             <div class="text-start">
-                <label class="form-check-label" for="BaczynskiCheck">
+                <label class="form-check-label" for="Baczynski">
                 Baczyński
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="BaczynskiCheck">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Baczynski">
             </div>
             <div class="text-start">
-                <label class="form-check-label" for="SienkiewiczCheck">
+                <label class="form-check-label" for="Sienkiewicz">
                 Sienkiewicz
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="SienkiewiczCheck">
+                <input class="form-check-input border border-secondary" type="checkbox" value="" id="Sienkiewicz">
             </div>
         </div>
         <div class="row text-start border border-secondary mt-1">
             <p class="text-start fs-4 fw-bold">Kategorie</p>
             <div class="text-start">
-                <label class="form-check-label" for="actionCheck">
+                <label class="form-check-label" for="akcja">
                 Akcja
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="actionCheck">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="akcja">
             </div>
             <div class="text-start">
-                <label class="form-check-label text-start" for="adventureCheck">
+                <label class="form-check-label text-start" for="przygoda">
                 Przygoda
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="adventureCheck">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="przygoda">
             </div>
             <div class="text-start">
-                <label class="form-check-label" for="HistoryCheck">
+                <label class="form-check-label" for="historia">
                 Historia
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="HistoryCheck">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="historia">
             </div>
             <div class="text-start">
-                <label class="form-check-label" for="ComedyCheck">
+                <label class="form-check-label" for="komedia">
                 Komedia
                 </label>
-                <input class="form-check-input border border-secondary" type="checkbox" value="" id="ComedyCheck">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="komedia">
             </div>
         </div>
         <div class="row border border-secondary mt-1">
@@ -252,7 +252,7 @@
                 {% endfor %}
 
         </div>
-        <nav aria-label="Page navigation example">
+        <nav id="books-nav" aria-label="Page navigation example">
             <ul class="pagination justify-content-center py-3">
                 {% if page_obj.has_previous %}
                 <li class="page-item">

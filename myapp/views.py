@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.db.models import Q
 
 from django.core.paginator import Paginator
 
@@ -295,21 +296,45 @@ def search_in_database(request):
 def search_based_on_filter(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        checked_values = data.get('checkedValues', [])
-        min_range = int(data.get('minRange', None))
-        max_range = int(data.get('maxRange', None))
-        books_in_range = Book.objects.filter(price__range=(min_range, max_range))
-        for book in books_in_range:
+        filters = Q()
+        checked_author = data.get('authorCheckedValues', [])
+        checked_category = data.get('categoryCheckedValues', [])
+        min_range = data.get('minRange', None)
+        max_range = data.get('maxRange', None)
+        if min_range:
+            filters &= Q(price__gte=int(min_range))
+            print(f"added min_range: {min_range}")
+        if max_range:
+            filters &= Q(price__lte=int(max_range))
+            print(f"added max_range: {max_range}")
+        if checked_author:
+            filters &= Q(author__in=checked_author)
+            print(f"added author: {checked_author}")
+        if checked_category:
+            filters &= Q(genres__name__in=checked_category)
+            print(f"added category: {checked_category}")
+
+        books = Book.objects.filter(filters).distinct()
+
+        print(f"How much books we have: {len(books)}")
+        for book in books:
             print(f"Book: {book.title}, price: {book.price}")
         books_data = []
-        for book in books_in_range:
+        for book in books:
             books_data.append({
+                'id': book.id,
                 'title': book.title,
                 'author': book.author,
                 'price': book.price,
-                'file': book.file.url if book.file else '',
-                'description': book.description
+                'file': book.file.url if book.file else ''
             })
-        print("finished")
-        return JsonResponse({'success': True})
+
+        paginator = Paginator(books_data, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return JsonResponse({
+            'success': True,
+            'books': list(page_obj)
+        })
 

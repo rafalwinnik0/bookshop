@@ -368,28 +368,32 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showFormResults () {
-    let checkboxes = document.querySelectorAll('.form-check-input');
+    let authorCheckboxes = document.querySelectorAll('.form-check-input-author');
+    let categoryCheckBoxes = document.querySelectorAll('.form-check-input-category')
 
-    let checkedValues = [];
-    checkboxes.forEach(function(checkbox) {
+    let authorCheckedValues = [];
+    authorCheckboxes.forEach(function(checkbox) {
         if (checkbox.checked) {
-            checkedValues.push(checkbox.id);
+            authorCheckedValues.push(checkbox.id);
         }
     });
 
-    let data = {
-        checkedValues: checkedValues
-    };
+    let categoryCheckedValues = [];
+    categoryCheckBoxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            categoryCheckedValues.push(checkbox.id);
+        }
+    });
 
     let minRange = document.getElementById('minRange').value;
     let maxRange = document.getElementById('maxRange').value;
 
-    if (minRange.trim() !== "") {
-        data.minRange = minRange;
-    }
-    if (maxRange.trim() !== "") {
-        data.maxRange = maxRange;
-    }
+    let data = {
+        authorCheckedValues: authorCheckedValues,
+        categoryCheckedValues: categoryCheckedValues,
+        minRange: minRange,
+        maxRange: maxRange
+    };
 
     fetch('/search-based-on-filter/', {
         method: 'POST',
@@ -402,16 +406,74 @@ function showFormResults () {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            console.log("Otrzymano odpowiedź od serwera");
-            const booksContainer = document.getElementById('books-container');
-            if (booksContainer) {
-                booksContainer.innerHTML = '';
-                console.log("Zawartość books-container została wyczyszczona");
-            } else {
-                console.error("Element o ID 'books-container' nie istnieje");
-            }
+            let booksContainer = document.getElementById('books-container');
+            let booksNav = document.getElementById('books-nav');
+            booksContainer.innerHTML = '';
+            booksNav.innerHTML = '';
+
+            console.log("Received books data", data.books);
+
+            data.books.forEach(function (book) {
+                let bookCard = `
+                <div class="card d-flex flex-column border border-secondary" style="border:none;">
+                    <a href="/book/${book.id}/">
+                        <img src="${book.file}" class="card-img-top" alt="" style="width: 80%;">
+                    </a>
+                    <div class="text-start py-2">
+                        <h5 class="card-subtitle fw-bold fs-6">${book.title}</h5>
+                        <p class="card-subtitle">
+                            <a class="custom-link" style="font-size:12px;" href="/author/${book.author}/">${book.author}</a>
+                        </p>
+                        <p class="card-subtitle fw-bold fs-5">${book.price} zł</p>
+                    </div>
+                    <button onclick="addToCart(${book.id})" class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
+                        Dodaj do koszyka
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
+                </div>
+                `;
+                booksContainer.innerHTML += bookCard;  // Dodajemy nowe książki
+            });
+//            let bookNavigator = `
+//                <ul class="pagination justify-content-center py-3">
+//                {% if ${page_obj.has_previous} %}
+//                <li class="page-item">
+//                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+//                        <span aria-hidden="true">&laquo;</span>
+//                    </a>
+//                </li>
+//                {% else %}
+//                <li class="page-item disabled">
+//                    <a class="page-link" aria-label="Previous">
+//                        <span aria-hidden="true">&laquo;</span>
+//                    </a>
+//                </li>
+//                {% endif %}
+//
+//                {% for ${num} in ${page_obj.paginator.page_range} %}
+//                <li class="page-item {% if ${page_obj.number} == ${num} %}active{% endif %}">
+//                    <a class="page-link" href="?page=${num}">{{ num }}</a>
+//                </li>
+//                {% endfor %}
+//
+//                {% if ${page_obj.has_next} %}
+//                <li class="page-item">
+//                    <a class="page-link" href="?page=${page_obj.next_page_number}" aria-label="Next">
+//                        <span aria-hidden="true">&raquo;</span>
+//                    </a>
+//                </li>
+//                {% else %}
+//                <li class="page-item disabled">
+//                    <a class="page-link" aria-label="Next">
+//                        <span aria-hidden="true">&raquo;</span>
+//                    </a>
+//                </li>
+//                {% endif %}
+//            </ul>
+//            `;
+//            booksNav.innerHTML += bookNavigator
         } else {
-            console.log("Wystąpił błąd po stronie serwera");
+            console.log("Error receiving data from server.");
         }
     })
     .catch((error) => {
