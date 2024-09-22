@@ -387,12 +387,14 @@ function showFormResults () {
 
     let minRange = document.getElementById('minRange').value;
     let maxRange = document.getElementById('maxRange').value;
+    let selectedSorting = document.getElementById('sort-options').value;
 
     let data = {
         authorCheckedValues: authorCheckedValues,
         categoryCheckedValues: categoryCheckedValues,
         minRange: minRange,
-        maxRange: maxRange
+        maxRange: maxRange,
+        selectedSorting: selectedSorting
     };
 
     fetch('/search-based-on-filter/', {
@@ -434,44 +436,6 @@ function showFormResults () {
                 `;
                 booksContainer.innerHTML += bookCard;  // Dodajemy nowe książki
             });
-//            let bookNavigator = `
-//                <ul class="pagination justify-content-center py-3">
-//                {% if ${page_obj.has_previous} %}
-//                <li class="page-item">
-//                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-//                        <span aria-hidden="true">&laquo;</span>
-//                    </a>
-//                </li>
-//                {% else %}
-//                <li class="page-item disabled">
-//                    <a class="page-link" aria-label="Previous">
-//                        <span aria-hidden="true">&laquo;</span>
-//                    </a>
-//                </li>
-//                {% endif %}
-//
-//                {% for ${num} in ${page_obj.paginator.page_range} %}
-//                <li class="page-item {% if ${page_obj.number} == ${num} %}active{% endif %}">
-//                    <a class="page-link" href="?page=${num}">{{ num }}</a>
-//                </li>
-//                {% endfor %}
-//
-//                {% if ${page_obj.has_next} %}
-//                <li class="page-item">
-//                    <a class="page-link" href="?page=${page_obj.next_page_number}" aria-label="Next">
-//                        <span aria-hidden="true">&raquo;</span>
-//                    </a>
-//                </li>
-//                {% else %}
-//                <li class="page-item disabled">
-//                    <a class="page-link" aria-label="Next">
-//                        <span aria-hidden="true">&raquo;</span>
-//                    </a>
-//                </li>
-//                {% endif %}
-//            </ul>
-//            `;
-//            booksNav.innerHTML += bookNavigator
         } else {
             console.log("Error receiving data from server.");
         }
@@ -480,3 +444,5 @@ function showFormResults () {
         console.error('Błąd podczas wysyłania danych:', error);
     });
 }
+
+document.getElementById('sort-options').addEventListener('change', showFormResults);

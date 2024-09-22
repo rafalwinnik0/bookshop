@@ -299,6 +299,7 @@ def search_based_on_filter(request):
         filters = Q()
         checked_author = data.get('authorCheckedValues', [])
         checked_category = data.get('categoryCheckedValues', [])
+        selectedSorting = data.get('selectedSorting', 'Sortowanie')
         min_range = data.get('minRange', None)
         max_range = data.get('maxRange', None)
         if min_range:
@@ -316,9 +317,21 @@ def search_based_on_filter(request):
 
         books = Book.objects.filter(filters).distinct()
 
-        print(f"How much books we have: {len(books)}")
-        for book in books:
-            print(f"Book: {book.title}, price: {book.price}")
+        if selectedSorting != '':
+            if selectedSorting == 'title_asc':
+                books = books.order_by('title')
+            elif selectedSorting == 'title_desc':
+                books = books.order_by('-title')
+            elif selectedSorting == 'price_asc':
+                books = books.order_by('price')
+            else:
+                books = books.order_by('-price')
+        else:
+            pass
+
+        # print(f"How much books we have: {len(books)}")
+        # for book in books:
+        #     print(f"Book: {book.title}, price: {book.price}")
         books_data = []
         for book in books:
             books_data.append({
@@ -329,12 +342,13 @@ def search_based_on_filter(request):
                 'file': book.file.url if book.file else ''
             })
 
-        paginator = Paginator(books_data, 8)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
+        # paginator = Paginator(books_data, 8)
+        # page_number = request.GET.get('page')
+        # page_obj = paginator.get_page(page_number)
 
         return JsonResponse({
             'success': True,
-            'books': list(page_obj)
+            'books': books_data
+            # 'books': list(page_obj)
         })
 
