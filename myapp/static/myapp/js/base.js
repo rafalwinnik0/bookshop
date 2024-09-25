@@ -409,16 +409,17 @@ function showFormResults () {
     .then(data => {
         if (data.success) {
             let booksContainer = document.getElementById('books-container');
-            let booksNav = document.getElementById('books-nav');
+            let booksNav = document.getElementById('nav-ul');
             booksContainer.innerHTML = '';
             booksNav.innerHTML = '';
 
             console.log("Received books data", data.books);
 
             data.books.forEach(function (book) {
+
                 let bookCard = `
                 <div class="card d-flex flex-column border border-secondary" style="border:none;">
-                    <a href="/book/${book.id}/">
+                    <a href="/${book.id}/">
                         <img src="${book.file}" class="card-img-top" alt="" style="width: 80%;">
                     </a>
                     <div class="text-start py-2">
@@ -434,8 +435,57 @@ function showFormResults () {
                     </button>
                 </div>
                 `;
-                booksContainer.innerHTML += bookCard;  // Dodajemy nowe książki
+                booksContainer.innerHTML += bookCard;
             });
+            let has_pr = '';
+            if (data.page_obj.has_previous) {
+                has_pr = `
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                `;
+            } else {
+                has_pr = `
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                `;
+            }
+            booksNav.innerHTML += has_pr;
+
+            data.page_obj.page_range.forEach(function (num) {
+                let liPage = `
+                <li class="page-item ${data.page_obj.page_number === num ? 'active' : ''}">
+                    <a class="page-link" href="?page=${num}">${num}</a>
+                </li>
+                `;
+                booksNav.innerHTML += liPage;
+            });
+            let has_next = '';
+            if (data.page_obj.has_next) {
+                has_next = `
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                `;
+            } else {
+                has_next = `
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                `;
+            }
+            booksNav.innerHTML += has_next;
+
+
         } else {
             console.log("Error receiving data from server.");
         }

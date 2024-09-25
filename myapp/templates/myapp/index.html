@@ -114,84 +114,90 @@
         <div class="row text-start border border-secondary">
             <p class="text-start fs-4 fw-bold">Autorzy</p>
             <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Mickiewicz">
                 <label class="form-check-label-author" for="Mickiewicz">
                 Mickiewicz
                 </label>
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Mickiewicz">
+
             </div>
             <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Skarga">
                 <label class="form-check-label text-start" for="Skarga">
                 Skarga
                 </label>
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Skarga">
+
             </div>
             <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Baczynski">
                 <label class="form-check-label" for="Baczynski">
                 Baczyński
                 </label>
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Baczynski">
+
             </div>
             <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Sienkiewicz">
                 <label class="form-check-label" for="Sienkiewicz">
                 Sienkiewicz
                 </label>
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Sienkiewicz">
             </div>
         </div>
         <div class="row text-start border border-secondary mt-1">
             <p class="text-start fs-4 fw-bold">Kategorie</p>
             <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="akcja">
                 <label class="form-check-label" for="akcja">
                 Akcja
                 </label>
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="akcja">
             </div>
             <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="przygoda">
                 <label class="form-check-label text-start" for="przygoda">
                 Przygoda
                 </label>
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="przygoda">
             </div>
             <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="historia">
                 <label class="form-check-label" for="historia">
                 Historia
                 </label>
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="historia">
             </div>
             <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="komedia">
                 <label class="form-check-label" for="komedia">
                 Komedia
                 </label>
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="komedia">
             </div>
         </div>
         <div class="row border border-secondary mt-1">
             <p class="text-start fs-4 fw-bold">Cena</p>
             <div class="col">
-                <input id="minRange" class="form-control" type="text" placeholder="min">
+                <input id="minRange" class="form-control rounded-pill" type="text" placeholder="min">
 <!--                <input type="range" class="form-range mt-2" min="0" max="200" step="1" id="customRange1">-->
             </div>
             <div class="col">
-                <input id="maxRange" class="form-control" type="text" placeholder="max">
+                <input id="maxRange" class="form-control rounded-pill" type="text" placeholder="max">
 <!--                <input type="range" class="form-range mt-2" min="0" max="200" step="1" id="customRange2">-->
             </div>
         </div>
         <div class="d-grid mt-2">
-            <button class="btn btn-danger rounded-pill" onclick="showFormResults()" type="button">
+            <button class="btn btn-danger rounded-pill text-nowrap" onclick="showFormResults()" type="button">
                 POKAŻ WYNIKI
                 <i class="fa fa-search"></i>
             </button>
         </div>
     </div>
     <div class="col-9 text-center">
-        <div class="d-flex border border-danger" >
-            <select id="sort-options" class="form-select-sm justify-content-end">
-                <option selected>Sortowanie</option>
-                <option value="title_asc">Tytuł rosnąco</option>
-                <option value="title_desc">Tytuł malejąco</option>
-                <option value="price_asc">Cena rosnąco</option>
-                <option value="price_desc">Cena malejąco</option>
-            </select>
+        <div class="" style="height:60px;">
+            <div class="d-flex border border-danger justify-content-end align-items-center text-bg-danger" style="font-family:Rosario; font-size:14px;">
+                Sortuj według:
+                <select id="sort-options" class="form-select-sm justify-content-end rounded-pill">
+                    <option selected>Sortowanie</option>
+                    <option value="title_asc">Tytuł rosnąco</option>
+                    <option value="title_desc">Tytuł malejąco</option>
+                    <option value="price_asc">Cena rosnąco</option>
+                    <option value="price_desc">Cena malejąco</option>
+                </select>
+            </div>
         </div>
         <div class="row row-cols-4 g-4" id="books-container">
                 {% for book in page_obj %}
@@ -202,7 +208,7 @@
                     <div class="text-start py-2">
                         <h5 class="card-subtitle fw-bold fs-6">{{book.title}}</h5>
                         <p class="card-subtitle">
-                            <a class="custom-link" style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
+                            <a class="custom-link bg-toogle" style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
                         </p>
                         <p class="card-subtitle fw-bold fs-5">{{ book.price }} zł</p>
                     </div>
@@ -216,7 +222,7 @@
         </div>
 
             <nav id="books-nav" class="border border-secondary pt-3" aria-label="Page navigation example">
-                <ul class=" pagination justify-content-center border border-danger">
+                <ul id="nav-ul" class="pagination justify-content-center border border-danger">
                     {% if page_obj.has_previous %}
                     <li class="page-item">
                         <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">

@@ -15,7 +15,7 @@ import json
 
 
 def index(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('title')
     paginator = Paginator(books, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -329,9 +329,6 @@ def search_based_on_filter(request):
         else:
             pass
 
-        # print(f"How much books we have: {len(books)}")
-        # for book in books:
-        #     print(f"Book: {book.title}, price: {book.price}")
         books_data = []
         for book in books:
             books_data.append({
@@ -342,13 +339,18 @@ def search_based_on_filter(request):
                 'file': book.file.url if book.file else ''
             })
 
-        # paginator = Paginator(books_data, 8)
-        # page_number = request.GET.get('page')
-        # page_obj = paginator.get_page(page_number)
-
+        paginator_f = Paginator(books_data, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator_f.get_page(page_number)
         return JsonResponse({
             'success': True,
-            'books': books_data
-            # 'books': list(page_obj)
+            'books': list(page_obj),
+            'page_obj': {
+                'has_previous': page_obj.has_previous(),
+                'has_next': page_obj.has_next(),
+                'num_pages': paginator_f.num_pages,
+                'page_number': page_obj.number,
+                'page_range': list(paginator_f.page_range),
+            }
         })
 
