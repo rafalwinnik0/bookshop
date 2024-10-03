@@ -5,23 +5,24 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.db.models import Q
-
 from django.core.paginator import Paginator
 
 from .models import Book, Order, OrderItem, UserProfile, UserAddress, Address
 from .forms import UserRegistrationForm, BookForm, AddressForm
 
+from itertools import zip_longest
 import json
+
+
+def group_books(books, n):
+    args = [iter(books)] * n
+    return zip_longest(*args)
 
 
 def index(request):
     books = Book.objects.all().order_by('title')
-    paginator = Paginator(books, 8)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request,
-                  'myapp/index.html',
-                  {'page_obj': page_obj})
+    grouped_books = group_books(books, 8)
+    return render(request, 'myapp/index.html', {'grouped_books': grouped_books})
 
 
 def register(request):
@@ -288,7 +289,7 @@ def search_in_database(request):
     query = request.GET.get('q', '')
     if query:
         books = Book.objects.filter(title__startswith=query)
-        books_data = list(books.values('id' , 'title', 'author', 'price', 'file'))
+        books_data = list(books.values('id', 'title', 'author', 'price', 'file'))
         return JsonResponse(books_data, safe=False)
     return JsonResponse([], safe=False)
 
@@ -354,3 +355,12 @@ def search_based_on_filter(request):
             }
         })
 
+
+def category(request):
+    books = Book.objects.all().order_by('title')
+    paginator = Paginator(books, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,
+                  'myapp/category.html',
+                  {'page_obj': page_obj})

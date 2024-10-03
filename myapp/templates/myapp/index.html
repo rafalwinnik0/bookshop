@@ -2,81 +2,202 @@
 {% load static %}
 {% block body %}
 
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
-            Usługi
-          </a>
-          <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
-            <div class="row">
-              <div class="col-md-4">
-                <h6>Kategoria 1</h6>
-                <ul class="list-unstyled">
-                  <li><a class="dropdown-item" href="#">Link 1</a></li>
-                  <li><a class="dropdown-item" href="#">Link 2</a></li>
-                  <li><a class="dropdown-item" href="#">Link 3</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <h6>Kategoria 2</h6>
-                <ul class="list-unstyled">
-                  <li><a class="dropdown-item" href="#">Link 4</a></li>
-                  <li><a class="dropdown-item" href="#">Link 5</a></li>
-                  <li><a class="dropdown-item" href="#">Link 6</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <h6>Kategoria 3</h6>
-                <ul class="list-unstyled">
-                  <li><a class="dropdown-item" href="#">Link 7</a></li>
-                  <li><a class="dropdown-item" href="#">Link 8</a></li>
-                  <li><a class="dropdown-item" href="#">Link 9</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
+<nav class="navbar navbar-expand-lg" style="background-color:#E5E3E3;">
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="color: #000;">
+        <ul class="navbar-nav d-flex flex-grow-1 justify-content-center">
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="25" src="{% static 'icons8-book-100_nav.png' %}" alt=""/> KSIĄŻKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Książki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="{% url 'category' %}">Biografie</a></li>
+                                <li><a class="dropdown-item" href="#">Dla dzieci</a></li>
+                                <li><a class="dropdown-item" href="#">Fantastyka</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Obcojęzyczne</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Angielskie</a></li>
+                                <li><a class="dropdown-item" href="#">Francuskie</a></li>
+                                <li><a class="dropdown-item" href="#">Hiszpańskie</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Podręczniki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Przedszkole</a></li>
+                                <li><a class="dropdown-item" href="#">Szkoła podstawowa</a></li>
+                                <li><a class="dropdown-item" href="#">Liceum i technikum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="25" src="{% static 'icons8-ebook-100.png' %}" alt=""/>E-BOOKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>E-booki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Biografie</a></li>
+                                <li><a class="dropdown-item" href="#">Dla młodieży</a></li>
+                                <li><a class="dropdown-item" href="#">Fantastyka</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Odkryj</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">TOP</a></li>
+                                <li><a class="dropdown-item" href="#">NOWOŚCI</a></li>
+                                <li><a class="dropdown-item" href="#">ZAPOWIEDZI</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Popularne serie</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Artefakty</a></li>
+                                <li><a class="dropdown-item" href="#">Mroczna strona</a></li>
+                                <li><a class="dropdown-item" href="#">Reportaż</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="30" src="{% static 'icons8-headphones-100.png' %}" alt=""/> AUDIOBOOKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Audiobooki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Biografie</a></li>
+                                <li><a class="dropdown-item" href="#">Biznes i ekonomia</a></li>
+                                <li><a class="dropdown-item" href="#">Dla młodieży</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Young Adult</a></li>
+                                <li><a class="dropdown-item" href="#">Dla dzieci 5</a></li>
+                                <li><a class="dropdown-item" href="#">Encyklopedie</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Odkryj</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">TOP</a></li>
+                                <li><a class="dropdown-item" href="#">NOWOŚCI</a></li>
+                                <li><a class="dropdown-item" href="#">ZAPOWIEDZI</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="28" src="{% static 'icons8-music-symbol-100.png' %}" alt=""/> MUZYKA
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Muzyka</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Alternatywa</a></li>
+                                <li><a class="dropdown-item" href="#">Blues</a></li>
+                                <li><a class="dropdown-item" href="#">Country</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Awangarda</a></li>
+                                <li><a class="dropdown-item" href="#">Chillout</a></li>
+                                <li><a class="dropdown-item" href="#">Jazz</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Odkryj</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item disable" >TOP</a></li>
+                                <li><a class="dropdown-item" >NOWOŚCI</a></li>
+                                <li><a class="dropdown-item" >ZAPOWIEDZI</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="30" src="{% static 'icons8-ps-controller-100.png' %}" alt=""/> GRY I ZABAWY
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-nav p-3"  data-bs-popper="static" aria-labelledby="navbarDropdown" style="width: 600px; right:0;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Gry i zabawki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Dla maluchów</a></li>
+                                <li><a class="dropdown-item" href="#">Figurki</a></li>
+                                <li><a class="dropdown-item" href="#">Lalki i akcesoria</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Edukacyjne</a></li>
+                                <li><a class="dropdown-item" href="#">Klocki</a></li>
+                                <li><a class="dropdown-item" href="#">Łamigłówki</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Puzzle, układanki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Puzzle do 99 el.</a></li>
+                                <li><a class="dropdown-item" href="#">Puzzle 100-300 el.</a></li>
+                                <li><a class="dropdown-item" href="#">Puzzle 500 el.</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
-  </div>
 </nav>
 
 <div id="carouselExampleCaptions" class="carousel slide mx-auto py-3">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button"  data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-            <div class="carousel-item active">
+        <div class="carousel-item active">
             <img src="{% static 'carousel_sale.jpg' %}" class="d-block w-100" alt="..." height="400">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Wyprzedaż</h5>
-                    <p>Wielka wyprzedaż w naszej księgarni!</p>
-                </div>
-            </div>
-        <div class="carousel-item">
-        <img src="{% static 'carousel_meeting.jpg' %}" class="d-block w-100" alt="..." height="400">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Dołącz do nas</h5>
-                <p>Załóż bezpłatne konto w naszej księgarni</p>
+            <div class="carousel-caption d-none d-md-block text-white">
+                <h5>Wyprzedaż</h5>
+                <p>Wielka wyprzedaż w naszej księgarni!</p>
             </div>
         </div>
         <div class="carousel-item">
-        <img src="{% static 'carousel_library.jpg' %}" class="d-block w-100" alt="..." height="400">
-            <div class="carousel-caption d-none d-md-block">
-            <h5>Brakuje jakieś książki?</h5>
-            <p>Zgłoś się do nas a uzupełnimy braki</p>
+            <img src="{% static 'carousel_meeting.jpg' %}" class="d-block w-100" alt="..." height="400">
+            <div class="carousel-caption d-none d-md-block text-white">
+                <h5>Dołącz do nas</h5>
+                <p>Załóż bezpłatne konto w naszej księgarni</p>
+            </div>
+            </div>
+        <div class="carousel-item">
+            <img src="{% static 'carousel_library.jpg' %}" class="d-block w-100" alt="..." height="400">
+            <div class="carousel-caption d-none d-md-block text-white">
+                <h5>Brakuje jakieś książki?</h5>
+                <p>Zgłoś się do nas a uzupełnimy braki</p>
             </div>
         </div>
     </div>
@@ -84,13 +205,13 @@
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <button class="carousel-control-next" style="width:5%;" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
 
-<div class="row row-cols-4 py-2 mb-2">
+<div class="container row row-cols-4 py-2 mb-2">
     <div class="col d-flex align-items-center justify-content-center">
 <!--        <i class="fa fa-book fa-2x" style="color:red" aria-hidden="True"></i> Polska literatura-->
         <img width="70" height="70" src="{% static 'icons8-sale-100.png' %}" alt="sale-price-tag"/> Promocje
@@ -109,156 +230,173 @@
     </div>
 </div>
 
-<div class="row border border-secondary">
-    <div class="col-3 text-center border border-secondary">
-        <div class="row text-start border border-secondary">
-            <p class="text-start fs-4 fw-bold">Autorzy</p>
-            <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Mickiewicz">
-                <label class="form-check-label-author" for="Mickiewicz">
-                Mickiewicz
-                </label>
 
-            </div>
-            <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Skarga">
-                <label class="form-check-label text-start" for="Skarga">
-                Skarga
-                </label>
 
+<div class="row">
+    <div class="col-3 ">
+        <div class="card w-75 bg-warning-subtle text-warning-emphasis mx-auto" style="height:770px;">
+            <div class="card-header text-center">
+                Reklama
             </div>
-            <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Baczynski">
-                <label class="form-check-label" for="Baczynski">
-                Baczyński
-                </label>
-
+            <div class="card-body d-flex flex-column text-center">
+                    <img src="{% static 'icons8-ad-100.png' %}" class="mt-3 mx-auto" height="100" width="100">
+                    <p class="fst-italic fw-semibold">Uwaga!</p>
+                    <p class="fst-italic fw-semibold">Ta reklama</p>
+                    <p class="fst-italic fw-semibold">może być</p>
+                    <p class="fst-italic fw-semibold">Twoja!</p>
+                    <button class="btn btn-warning btn-sm text-warning-emphasis mt-3 rounded-pill fst-italic">
+                        sprawdź >>
+                    </button>
             </div>
-            <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Sienkiewicz">
-                <label class="form-check-label" for="Sienkiewicz">
-                Sienkiewicz
-                </label>
-            </div>
-        </div>
-        <div class="row text-start border border-secondary mt-1">
-            <p class="text-start fs-4 fw-bold">Kategorie</p>
-            <div class="text-start">
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="akcja">
-                <label class="form-check-label" for="akcja">
-                Akcja
-                </label>
-            </div>
-            <div class="text-start">
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="przygoda">
-                <label class="form-check-label text-start" for="przygoda">
-                Przygoda
-                </label>
-            </div>
-            <div class="text-start">
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="historia">
-                <label class="form-check-label" for="historia">
-                Historia
-                </label>
-            </div>
-            <div class="text-start">
-                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="komedia">
-                <label class="form-check-label" for="komedia">
-                Komedia
-                </label>
-            </div>
-        </div>
-        <div class="row border border-secondary mt-1">
-            <p class="text-start fs-4 fw-bold">Cena</p>
-            <div class="col">
-                <input id="minRange" class="form-control rounded-pill" type="text" placeholder="min">
-<!--                <input type="range" class="form-range mt-2" min="0" max="200" step="1" id="customRange1">-->
-            </div>
-            <div class="col">
-                <input id="maxRange" class="form-control rounded-pill" type="text" placeholder="max">
-<!--                <input type="range" class="form-range mt-2" min="0" max="200" step="1" id="customRange2">-->
-            </div>
-        </div>
-        <div class="d-grid mt-2">
-            <button class="btn btn-danger rounded-pill text-nowrap" onclick="showFormResults()" type="button">
-                POKAŻ WYNIKI
-                <i class="fa fa-search"></i>
-            </button>
         </div>
     </div>
-    <div class="col-9 text-center">
-        <div class="" style="height:60px;">
-            <div class="d-flex border border-danger justify-content-end align-items-center text-bg-danger" style="font-family:Rosario; font-size:14px;">
-                Sortuj według:
-                <select id="sort-options" class="form-select-sm justify-content-end rounded-pill">
-                    <option selected>Sortowanie</option>
-                    <option value="title_asc">Tytuł rosnąco</option>
-                    <option value="title_desc">Tytuł malejąco</option>
-                    <option value="price_asc">Cena rosnąco</option>
-                    <option value="price_desc">Cena malejąco</option>
-                </select>
+    <div class=" col-9 text-center ">
+            <div id="bookCarousel" class="container carousel slide" data-bs-ride="carousel">
+    <!--            <div class="carousel-indicators">-->
+    <!--                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>-->
+    <!--                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>-->
+    <!--                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
+    <!--                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>-->
+    <!--            </div>-->
+                <div class="carousel-inner ">
+                    {% for book_group in grouped_books %}
+                    <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                        <div class="row row row-cols-4 g-4" id="books-container">
+                            {% for book in book_group %}
+                            {% if book %}
+                            <div class="card d-flex flex-column " style="border:none;">
+                                <a href="{% url 'show_book' book.id %}">
+                                    <img src="{{ book.file.url }}" class="card-img-top" alt="" style="width: 80%;">
+                                </a>
+                                <div class="text-start py-2">
+                                    <h5 class="card-subtitle fw-bold fs-6">{{book.title}}</h5>
+                                    <p class="card-subtitle">
+                                        <a class="custom-link bg-toogle" style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
+                                    </p>
+                                    <p class="card-subtitle fw-bold fs-5">{{ book.price }} zł</p>
+                                </div>
+                                <button onclick="addToCart({{ book.id }})" class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
+                                    Dodaj do koszyka
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="bg-danger-subtle" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev" style="
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 1%;
+                    padding: 0;
+                    color: #fff;
+                    text-align: center;
+                    background: none;
+                    border: 0;
+                    opacity: 0.5;
+                    transition: opacity 0.15s ease;">
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="bg-danger-subtle" type="button" data-bs-target="#bookCarousel" data-bs-slide="next" style="
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 1%;
+                    padding: 0;
+                    color: none;
+                    text-align: center;
+                    background: orange;
+                    border: 0;
+                    opacity: 0.5;
+                    transition: opacity 0.15s ease;">
+    <!--                <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+    </div>
+</div>
+<hr class="featurette-divider mt-5">
+<div class="container row mt-5 mb-5" style=" height: 16rem;">
+    <div class="text-center fw-bold fs-2 mb-3" style="font-family:Poppins;">
+        Znajdź coś dla siebie
+    </div>
+    <div class="col">
+        <div class="card" >
+            <img src="{% static 'reading-men.jpg' %}" style="width: 100%; height: 200px;" class="rounded" alt="...">
+            <div class="d-flex justify-content-center align-items-center card-img-overlay">
+                <button class="btn btn-light rounded-pill ">
+                    Bestsellery dla mężczyzn
+                </button>
             </div>
         </div>
-        <div class="row row-cols-4 g-4" id="books-container">
-                {% for book in page_obj %}
-                <div class="card d-flex flex-column border border-secondary" style="border:none;">
-                    <a href="{% url 'show_book' book.id %}">
-                        <img src="{{ book.file.url }}" class="card-img-top" alt="" style="width: 80%;">
-                    </a>
-                    <div class="text-start py-2">
-                        <h5 class="card-subtitle fw-bold fs-6">{{book.title}}</h5>
-                        <p class="card-subtitle">
-                            <a class="custom-link bg-toogle" style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
-                        </p>
-                        <p class="card-subtitle fw-bold fs-5">{{ book.price }} zł</p>
-                    </div>
-                    <button onclick="addToCart({{ book.id }})" class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
-                        Dodaj do koszyka
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-                {% endfor %}
-
+    </div>
+    <div class="col">
+        <div class="card" >
+            <img src="{% static 'trees.jpg' %}" style="width: 100%; height: 200px;" class="rounded" alt="...">
+            <div class="d-flex justify-content-center align-items-center card-img-overlay">
+                <button class="btn btn-light rounded-pill ">
+                    Książki o relacjach
+                </button>
+            </div>
         </div>
-
-            <nav id="books-nav" class="border border-secondary pt-3" aria-label="Page navigation example">
-                <ul id="nav-ul" class="pagination justify-content-center border border-danger">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-
-                    {% for num in page_obj.paginator.page_range %}
-                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                    </li>
-                    {% endfor %}
-
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
-
+    </div>
+    <div class="col">
+        <div class="card">
+            <img src="{% static 'nowosci.png' %}" style="width: 100%; height: 200px;" class="rounded" alt="...">
+            <div class="d-flex justify-content-center align-items-center card-img-overlay">
+                <button class="btn btn-light rounded-pill " style="font-size:12px;">
+                    Nadchodzące premiery
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="featurette-divider">
+<div id="newsletterDiv" class="container row d-flex align-items-center mt-5 mb-5 " data-bs-theme="light" style="height:300px; background-color:#E5E3E3; font-family:Poppins">
+    <div class="col ">
+        <p class="text-center fs-1 fw-bold" style="color: #000;">
+            Zapisz się do <a class="text-white text-decoration-none fw-bold bg bg-danger" >newslettera!</a>
+        </p>
+        <p class="text-center fs-5" style="color: #000;">
+            <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Bądź na bieżąco z nowościami
+        </p>
+        <p class="text-center fs-5" style="color: #000;">
+            <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Otrzymuj specjalne oferty
+        </p>
+    </div>
+    <div class="col">
+        <p style="color: #000;">
+            Administratorem Twoich danych osobowych jest Bookshop. Więcej informacji na temat zasad przetwarzania danych znajdziesz w
+            <span class="text-danger fw-bold">Polityce Prywatności</span>.
+        </p>
+        <div class="d-flex" role="search">
+            <input id="newsletterInput" class="form-control me-2 rounded-pill border border-secondary" type="text" placeholder="Wprowadź swój adres e-mail" aria-label="Search">
+            <button onclick="newsletterCommunicat(event)" class="btn btn-danger rounded-pill" type="submit">
+            SUBSKRYBUJ
+            </button>
+        </div>
+        <div class="form-check mt-2 text-body">
+            <input class="form-check-input border border-secondary" type="checkbox" value="" id="sub">
+            <label class="form-check-label text-body-secondary text-body" for="sub" style="font-size:12px;">
+                Wyrażam zgodę na otrzymywanie na podany adres e-mail informacji marketingowych i handlowych związanych z działalnością
+                Bookshop. Jestem świadomy/-a, że zgodę tę mogę w każdej chwili wycofać.
+            </label>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -460,7 +460,7 @@ function showFormResults () {
             data.page_obj.page_range.forEach(function (num) {
                 let liPage = `
                 <li class="page-item ${data.page_obj.page_number === num ? 'active' : ''}">
-                    <a class="page-link" href="?page=${num}">${num}</a>
+                    <a class="page-link" href="/search_based_on_filter/?page=${num}">${num}</a>
                 </li>
                 `;
                 booksNav.innerHTML += liPage;
@@ -496,3 +496,15 @@ function showFormResults () {
 }
 
 document.getElementById('sort-options').addEventListener('change', showFormResults);
+
+function newsletterCommunicat(event) {
+    event.preventDefault();
+    const newsInput = document.getElementById('newsletterInput');
+    const email = newsInput.value;
+    if (email) {
+        newsInput.value = '';
+        alert("Thank you for joining to our society!");
+    } else {
+        alert("Enter email address!");
+    }
+}

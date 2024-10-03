@@ -1,0 +1,476 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block body %}
+<nav class="navbar navbar-expand-lg" style="background-color:#E5E3E3;">
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="color: #000;">
+        <ul class="navbar-nav d-flex flex-grow-1 justify-content-center">
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="25" src="{% static 'icons8-book-100_nav.png' %}" alt=""/> KSIĄŻKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Książki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="{% url 'category' %}">Biografie</a></li>
+                                <li><a class="dropdown-item" href="#">Dla dzieci</a></li>
+                                <li><a class="dropdown-item" href="#">Fantastyka</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Obcojęzyczne</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Angielskie</a></li>
+                                <li><a class="dropdown-item" href="#">Francuskie</a></li>
+                                <li><a class="dropdown-item" href="#">Hiszpańskie</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Podręczniki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Przedszkole</a></li>
+                                <li><a class="dropdown-item" href="#">Szkoła podstawowa</a></li>
+                                <li><a class="dropdown-item" href="#">Liceum i technikum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="25" src="{% static 'icons8-ebook-100.png' %}" alt=""/>E-BOOKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>E-booki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Biografie</a></li>
+                                <li><a class="dropdown-item" href="#">Dla młodieży</a></li>
+                                <li><a class="dropdown-item" href="#">Fantastyka</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Odkryj</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">TOP</a></li>
+                                <li><a class="dropdown-item" href="#">NOWOŚCI</a></li>
+                                <li><a class="dropdown-item" href="#">ZAPOWIEDZI</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Popularne serie</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Artefakty</a></li>
+                                <li><a class="dropdown-item" href="#">Mroczna strona</a></li>
+                                <li><a class="dropdown-item" href="#">Reportaż</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="30" src="{% static 'icons8-headphones-100.png' %}" alt=""/> AUDIOBOOKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Audiobooki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Biografie</a></li>
+                                <li><a class="dropdown-item" href="#">Biznes i ekonomia</a></li>
+                                <li><a class="dropdown-item" href="#">Dla młodieży</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Young Adult</a></li>
+                                <li><a class="dropdown-item" href="#">Dla dzieci 5</a></li>
+                                <li><a class="dropdown-item" href="#">Encyklopedie</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Odkryj</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">TOP</a></li>
+                                <li><a class="dropdown-item" href="#">NOWOŚCI</a></li>
+                                <li><a class="dropdown-item" href="#">ZAPOWIEDZI</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="28" src="{% static 'icons8-music-symbol-100.png' %}" alt=""/> MUZYKA
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Muzyka</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Alternatywa</a></li>
+                                <li><a class="dropdown-item" href="#">Blues</a></li>
+                                <li><a class="dropdown-item" href="#">Country</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Awangarda</a></li>
+                                <li><a class="dropdown-item" href="#">Chillout</a></li>
+                                <li><a class="dropdown-item" href="#">Jazz</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Odkryj</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item disable" >TOP</a></li>
+                                <li><a class="dropdown-item" >NOWOŚCI</a></li>
+                                <li><a class="dropdown-item" >ZAPOWIEDZI</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
+                <img width="30" height="30" src="{% static 'icons8-ps-controller-100.png' %}" alt=""/> GRY I ZABAWY
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-nav p-3"  data-bs-popper="static" aria-labelledby="navbarDropdown" style="width: 600px; right:0;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Gry i zabawki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Dla maluchów</a></li>
+                                <li><a class="dropdown-item" href="#">Figurki</a></li>
+                                <li><a class="dropdown-item" href="#">Lalki i akcesoria</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Edukacyjne</a></li>
+                                <li><a class="dropdown-item" href="#">Klocki</a></li>
+                                <li><a class="dropdown-item" href="#">Łamigłówki</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Puzzle, układanki</h6>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="#">Puzzle do 99 el.</a></li>
+                                <li><a class="dropdown-item" href="#">Puzzle 100-300 el.</a></li>
+                                <li><a class="dropdown-item" href="#">Puzzle 500 el.</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container row border border-secondary mt-4">
+    <div class="col-3 text-center border border-secondary">
+
+        <div class="row text-start border border-secondary mt-1">
+            <p class="text-start fs-4 fw-bold">Kategorie</p>
+            <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="akcja">
+                <label class="form-check-label" for="akcja">
+                Akcja
+                </label>
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="przygoda">
+                <label class="form-check-label text-start" for="przygoda">
+                Przygoda
+                </label>
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="historia">
+                <label class="form-check-label" for="historia">
+                Historia
+                </label>
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-category border border-secondary" type="checkbox" value="" id="komedia">
+                <label class="form-check-label" for="komedia">
+                Komedia
+                </label>
+            </div>
+        </div>
+        <div class="row text-start border border-secondary">
+            <p class="text-start fs-5 fw-bold">Dostępność</p>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_24h">
+                <label class="form-check-label-author" for="send_24h">
+                Wysyłamy w 24 h
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_3days">
+                <label class="form-check-label text-start" for="send_3days">
+                Wysyłamy w 3 dni
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_5days">
+                <label class="form-check-label" for="send_5days">
+                Wysyłamy w 5-7 dni
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_10days">
+                <label class="form-check-label" for="send_10days">
+                Wysyłamy w 10 dni
+                </label>
+            </div>
+        </div>
+        <div class="row text-start border border-secondary">
+            <p class="text-start fs-5 fw-bold">TOP</p>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_week">
+                <label class="form-check-label-author" for="top_week">
+                Tygodnia
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_month">
+                <label class="form-check-label text-start" for="top_month">
+                Miesiąca
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_year">
+                <label class="form-check-label" for="top_year">
+                Bieżącego roku
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_last_year">
+                <label class="form-check-label" for="top_last_year">
+                Zeszłego roku
+                </label>
+            </div>
+        </div>
+        <div class="row text-start border border-secondary">
+            <p class="text-start fs-5 fw-bold">NOWOSC</p>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="new_yes">
+                <label class="form-check-label-author" for="new_yes">
+                Tak
+                </label>
+            </div>
+        </div>
+        <div class="row text-start border border-secondary">
+            <p class="text-start fs-4 fw-bold">Autorzy</p>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Mickiewicz">
+                <label class="form-check-label-author" for="Mickiewicz">
+                Mickiewicz
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Skarga">
+                <label class="form-check-label text-start" for="Skarga">
+                Skarga
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Baczynski">
+                <label class="form-check-label" for="Baczynski">
+                Baczyński
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="Sienkiewicz">
+                <label class="form-check-label" for="Sienkiewicz">
+                Sienkiewicz
+                </label>
+            </div>
+        </div>
+        <div class="row text-start border border-secondary">
+            <p class="text-start fs-4 fw-bold">Ocena</p>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="five_star">
+                <label class="form-check-label-author" for="five_star">
+                5 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="four_star">
+                <label class="form-check-label text-start" for="four_star">
+                4 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="three_star">
+                <label class="form-check-label" for="three_star">
+                3 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                </label>
+
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="two_star">
+                <label class="form-check-label" for="two_star">
+                2 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                    <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                </label>
+            </div>
+            <div class="text-start">
+                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="one_star">
+                <label class="form-check-label" for="one_star">
+                1 gwiazdka <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
+                </label>
+            </div>
+        </div>
+
+        <div class="row border border-secondary mt-1">
+            <p class="text-start fs-4 fw-bold">Cena</p>
+            <div class="col">
+                <input id="minRange" class="form-control rounded-pill" type="text" placeholder="min">
+<!--                <input type="range" class="form-range mt-2" min="0" max="200" step="1" id="customRange1">-->
+            </div>
+            <div class="col">
+                <input id="maxRange" class="form-control rounded-pill" type="text" placeholder="max">
+<!--                <input type="range" class="form-range mt-2" min="0" max="200" step="1" id="customRange2">-->
+            </div>
+        </div>
+        <div class="d-grid mt-2">
+            <button class="btn btn-danger rounded-pill text-nowrap" onclick="showFormResults()" type="button">
+                POKAŻ WYNIKI
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-9 text-center">
+        <div class="" style="height:60px;">
+            <div class="d-flex border border-danger justify-content-end align-items-center text-bg-danger" style="font-family:Rosario; font-size:14px;">
+                Sortuj według:
+                <select id="sort-options" class="form-select-sm justify-content-end rounded-pill">
+                    <option selected>Sortowanie</option>
+                    <option value="title_asc">Tytuł rosnąco</option>
+                    <option value="title_desc">Tytuł malejąco</option>
+                    <option value="price_asc">Cena rosnąco</option>
+                    <option value="price_desc">Cena malejąco</option>
+                </select>
+            </div>
+        </div>
+        <div class="row row-cols-4 g-4" id="books-container">
+            {% for book in page_obj %}
+            <div class="card d-flex flex-column border border-secondary" style="border:none;">
+                <a href="{% url 'show_book' book.id %}">
+                    <img src="{{ book.file.url }}" class="card-img-top" alt="" style="width: 80%;">
+                </a>
+                <div class="text-start py-2">
+                    <h5 class="card-subtitle fw-bold fs-6">{{book.title}}</h5>
+                    <p class="card-subtitle">
+                        <a class="custom-link bg-toogle" style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
+                    </p>
+                    <p class="card-subtitle fw-bold fs-5">{{ book.price }} zł</p>
+                </div>
+                <button onclick="addToCart({{ book.id }})" class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
+                    Dodaj do koszyka
+                    <i class="fa fa-shopping-cart"></i>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+
+            <nav id="books-nav" class="border border-secondary pt-3" aria-label="Page navigation example">
+                <ul id="nav-ul" class="pagination justify-content-center border border-danger">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="/category/?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                        <a class="page-link" href="/category/?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="/category/?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+    </div>
+</div>
+
+<hr class="featurette-divider">
+<div id="newsletterDiv" class="container row d-flex align-items-center mt-5 mb-5 " data-bs-theme="light" style="height:300px; background-color:#E5E3E3; font-family:Poppins">
+    <div class="col ">
+        <p class="text-center fs-1 fw-bold" style="color: #000;">
+            Zapisz się do <a class="text-white text-decoration-none fw-bold bg bg-danger" >newslettera!</a>
+        </p>
+        <p class="text-center fs-5" style="color: #000;">
+            <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Bądź na bieżąco z nowościami
+        </p>
+        <p class="text-center fs-5" style="color: #000;">
+            <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Otrzymuj specjalne oferty
+        </p>
+    </div>
+    <div class="col">
+        <p style="color: #000;">
+            Administratorem Twoich danych osobowych jest Bookshop. Więcej informacji na temat zasad przetwarzania danych znajdziesz w
+            <span class="text-danger fw-bold">Polityce Prywatności</span>.
+        </p>
+        <div class="d-flex" role="search">
+            <input id="newsletterInput" class="form-control me-2 rounded-pill border border-secondary" type="text" placeholder="Wprowadź swój adres e-mail" aria-label="Search">
+            <button onclick="newsletterCommunicat(event)" class="btn btn-danger rounded-pill" type="submit">
+            SUBSKRYBUJ
+            </button>
+        </div>
+        <div class="form-check mt-2 text-body">
+            <input class="form-check-input border border-secondary" type="checkbox" value="" id="sub">
+            <label class="form-check-label text-body-secondary text-body" for="sub" style="font-size:12px;">
+                Wyrażam zgodę na otrzymywanie na podany adres e-mail informacji marketingowych i handlowych związanych z działalnością
+                Bookshop. Jestem świadomy/-a, że zgodę tę mogę w każdej chwili wycofać.
+            </label>
+        </div>
+    </div>
+</div>
+{% endblock %}

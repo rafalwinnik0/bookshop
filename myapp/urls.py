@@ -30,6 +30,7 @@ urlpatterns = [
     path('account-locked/', views.account_locked, name='account_locked'),
     path('search/', views.search_in_database, name='search_in_database'),
     path('search-based-on-filter/', views.search_based_on_filter, name='search_based_on_filter'),
+    path('category/', views.category, name='category'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
