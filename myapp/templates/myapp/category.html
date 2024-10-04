@@ -170,7 +170,6 @@
         </ul>
     </div>
 </nav>
-
 <div class="container row border border-secondary mt-4">
     <div class="col-3 text-center border border-secondary">
 
@@ -399,47 +398,46 @@
             {% endfor %}
         </div>
 
-            <nav id="books-nav" class="border border-secondary pt-3" aria-label="Page navigation example">
-                <ul id="nav-ul" class="pagination justify-content-center border border-danger">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="/category/?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
+        <nav id="books-nav" class="border border-secondary pt-3" aria-label="Page navigation example">
+            <ul id="nav-ul" class="pagination justify-content-end border border-danger">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="/category/?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
 
-                    {% for num in page_obj.paginator.page_range %}
-                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                        <a class="page-link" href="/category/?page={{ num }}">{{ num }}</a>
-                    </li>
-                    {% endfor %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="/category/?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
 
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="/category/?page={{ page_obj.next_page_number }}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="/category/?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
 
     </div>
 </div>
-
 <hr class="featurette-divider">
 <div id="newsletterDiv" class="container row d-flex align-items-center mt-5 mb-5 " data-bs-theme="light" style="height:300px; background-color:#E5E3E3; font-family:Poppins">
     <div class="col ">

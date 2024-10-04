@@ -441,7 +441,7 @@ function showFormResults () {
             if (data.page_obj.has_previous) {
                 has_pr = `
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                    <a class="page-link" href="/category/?page=${data.page_obj.page_number - 1}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -460,7 +460,7 @@ function showFormResults () {
             data.page_obj.page_range.forEach(function (num) {
                 let liPage = `
                 <li class="page-item ${data.page_obj.page_number === num ? 'active' : ''}">
-                    <a class="page-link" href="/search_based_on_filter/?page=${num}">${num}</a>
+                    <a class="page-link" href="/category/?page=${num}">${num}</a>
                 </li>
                 `;
                 booksNav.innerHTML += liPage;
@@ -469,7 +469,7 @@ function showFormResults () {
             if (data.page_obj.has_next) {
                 has_next = `
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link" href="/category/?page=${data.page_obj.page_number + 1}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
