@@ -508,3 +508,102 @@ function newsletterCommunicat(event) {
         alert("Enter email address!");
     }
 }
+
+function retrieveFromSessionStorage() {
+    let savedAuthors = JSON.parse(sessionStorage.getItem('authors') || '[]');
+    savedAuthors.forEach(author => {
+        let checkbox = document.querySelector(`input[name="author"][value="${author}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+
+    let savedCategories = JSON.parse(sessionStorage.getItem('categories') || '[]');
+    savedCategories.forEach(category => {
+        let categoryCheckbox = document.querySelector(`input[name="category"][value="${category}"]`);
+        if (categoryCheckbox) {
+            categoryCheckbox.checked = true;
+        }
+    });
+
+    let minRange = sessionStorage.getItem('minRange');
+    let maxRange = sessionStorage.getItem('maxRange');
+
+    if (minRange) {
+        document.querySelector('input[name="minRange"]').value = minRange;
+    }
+    if (maxRange) {
+        document.querySelector('input[name="maxRange"]').value = maxRange;
+    }
+}
+
+function clearFiltersFromSessionStorage() {
+    sessionStorage.removeItem('authors');
+    sessionStorage.removeItem('categories');
+    sessionStorage.removeItem('minRange');
+    sessionStorage.removeItem('maxRange');
+}
+
+function applyFilters(page = 1) {
+
+    clearFiltersFromSessionStorage();
+
+    let authors = [];
+    document.querySelectorAll('input[name="author"]:checked').forEach((checkbox) => {
+        authors.push(checkbox.value);
+    });
+
+    let categories = [];
+    document.querySelectorAll('input[name="category"]:checked').forEach((checkbox) => {
+        categories.push(checkbox.value);
+    });
+
+    let minRange = document.getElementById('minRange').value;
+    let maxRange = document.getElementById('maxRange').value;
+
+////    saving data to sessionStorage
+
+    sessionStorage.setItem('authors', JSON.stringify(authors));
+    sessionStorage.setItem('categories', JSON.stringify(categories));
+    sessionStorage.setItem('minRange', minRange);
+    sessionStorage.setItem('maxRange', maxRange);
+
+    let params = new URLSearchParams();
+
+    authors.forEach((author) => {
+        params.append('author', author);
+    });
+
+    categories.forEach((category) => {
+        params.append('category', category);
+    });
+
+    if (minRange) params.append('minRange', minRange);
+    if (maxRange) params.append('maxRange', maxRange);
+
+    params.append('page', page);
+
+    window.location.href = `/new-filter/?${params.toString()}`;
+
+//    let data = {
+//        authors: authors,
+//        categories: categories,
+//        minRange: minRange,
+//        maxRange: maxRange
+//    };
+//
+//    fetch('/new-filter/', {
+//        method: 'POST',
+//        headers: {
+//            'Content-Type': 'application/json',
+//            'X-CSRFToken': getCookie('csrftoken')
+//        },
+//        body: JSON.stringify(data)
+//    });
+//    window.location.href = `/new-filter/`;
+}
+
+//LOADING FILTERS
+window.onload = function() {
+    retrieveFromSessionStorage();
+};

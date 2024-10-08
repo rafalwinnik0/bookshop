@@ -31,6 +31,7 @@ urlpatterns = [
     path('search/', views.search_in_database, name='search_in_database'),
     path('search-based-on-filter/', views.search_based_on_filter, name='search_based_on_filter'),
     path('category/', views.category, name='category'),
+    path('new-filter/', views.new_filter, name='new_filter'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
