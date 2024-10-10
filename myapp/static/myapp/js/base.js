@@ -495,8 +495,6 @@ function showFormResults () {
     });
 }
 
-document.getElementById('sort-options').addEventListener('change', showFormResults);
-
 function newsletterCommunicat(event) {
     event.preventDefault();
     const newsInput = document.getElementById('newsletterInput');
@@ -560,8 +558,7 @@ function applyFilters(page = 1) {
 
     let minRange = document.getElementById('minRange').value;
     let maxRange = document.getElementById('maxRange').value;
-
-////    saving data to sessionStorage
+    let selectedSorting = document.getElementById('sort-options').value;
 
     sessionStorage.setItem('authors', JSON.stringify(authors));
     sessionStorage.setItem('categories', JSON.stringify(categories));
@@ -581,7 +578,9 @@ function applyFilters(page = 1) {
     if (minRange) params.append('minRange', minRange);
     if (maxRange) params.append('maxRange', maxRange);
 
+    if (selectedSorting) params.append('selected_sorting', selectedSorting);
     params.append('page', page);
+
 
     window.location.href = `/new-filter/?${params.toString()}`;
 
@@ -615,3 +614,10 @@ function increaseAndExecuteFunction(pageNum) {
 function decreaseAndExecuteFunction(pageNum) {
     applyFilters(pageNum - 1);
 }
+
+function clearSessionStorageButton() {
+    clearFiltersFromSessionStorage();
+    retrieveFromSessionStorage();
+}
+
+document.getElementById('sort-options').addEventListener('change', applyFilters);

@@ -367,7 +367,6 @@ def category(request):
 
 
 def new_filter(request):
-
     # Receive data from fetch api
     # data = json.loads(request.body)
     # author_filters = data.get('authors', [])
@@ -379,6 +378,7 @@ def new_filter(request):
     category_filters = request.GET.getlist('category')
     min_range = request.GET.get('minRange', None)
     max_range = request.GET.get('maxRange', None)
+    sorting_method = request.GET.get('selected_sorting', None)
 
     filters = Q()
 
@@ -391,8 +391,22 @@ def new_filter(request):
     if max_range:
         filters &= Q(price__lte=int(max_range))
 
-    books = Book.objects.filter(filters).distinct().order_by('title')
+    books = Book.objects.filter(filters).distinct()
+
+    if sorting_method != 'default':
+        if sorting_method == 'title_asc':
+            books = books.order_by('title')
+        elif sorting_method == 'title_desc':
+            books = books.order_by('-title')
+        elif sorting_method == 'price_asc':
+            books = books.order_by('price')
+        else:
+            books = books.order_by('-price')
+    else:
+        pass
+
     paginator = Paginator(books, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'myapp/filter.html', {'page_obj': page_obj})
+    return render(request, 'myapp/filter.html', {'page_obj': page_obj,
+                                                 'sorting_method': sorting_method})

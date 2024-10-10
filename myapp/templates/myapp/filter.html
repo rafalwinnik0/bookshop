@@ -375,16 +375,17 @@
     </div>
 <!--END-->
     <div class="col-9 text-center">
+
 <!--    SORTING BUTTON-->
         <div class="" style="height:60px;">
             <div class="d-flex border border-danger justify-content-end align-items-center text-bg-danger" style="font-family:Rosario; font-size:14px;">
                 Sortuj według:
                 <select id="sort-options" class="form-select-sm justify-content-end rounded-pill">
-                    <option selected>Sortowanie</option>
-                    <option value="title_asc">Tytuł rosnąco</option>
-                    <option value="title_desc">Tytuł malejąco</option>
-                    <option value="price_asc">Cena rosnąco</option>
-                    <option value="price_desc">Cena malejąco</option>
+                    <option value="default">Sortowanie</option>
+                    <option value="title_asc" {% if sorting_method == 'title_asc' %}selected{% endif %}>Tytuł rosnąco</option>
+                    <option value="title_desc" {% if sorting_method == 'title_desc' %}selected{% endif %}>Tytuł malejąco</option>
+                    <option value="price_asc" {% if sorting_method == 'price_asc' %}selected{% endif %}>Cena rosnąco</option>
+                    <option value='price_desc' {% if sorting_method == "price_desc" %}selected{% endif %}>Cena malejąco</option>
                 </select>
             </div>
         </div>
