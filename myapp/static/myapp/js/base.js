@@ -607,3 +607,11 @@ function applyFilters(page = 1) {
 window.onload = function() {
     retrieveFromSessionStorage();
 };
+
+function increaseAndExecuteFunction(pageNum) {
+    applyFilters(pageNum + 1);
+}
+
+function decreaseAndExecuteFunction(pageNum) {
+    applyFilters(pageNum - 1);
+}

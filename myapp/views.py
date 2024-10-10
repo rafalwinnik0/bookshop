@@ -391,8 +391,6 @@ def new_filter(request):
     if max_range:
         filters &= Q(price__lte=int(max_range))
 
-    print(filters)
-
     books = Book.objects.filter(filters).distinct().order_by('title')
     paginator = Paginator(books, 8)
     page_number = request.GET.get('page')

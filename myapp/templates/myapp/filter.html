@@ -418,15 +418,15 @@
             <ul id="nav-ul" class="pagination justify-content-end border border-danger">
                 {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" onclick="applyFilters({{ num }} - 1)" aria-label="Previous">
+                    <button class="page-link" onclick="decreaseAndExecuteFunction({{ page_obj.page_number }})" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
-                    </a>
+                    </button>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" aria-label="Previous">
+                    <button class="page-link" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
-                    </a>
+                    </button>
                 </li>
                 {% endif %}
 
@@ -438,15 +438,16 @@
 
                 {% if page_obj.has_next %}
                 <li class="page-item">
-                    <a class="page-link" onclick="applyFilters({{ num }} + 1)" aria-label="Next">
+                    <button class="page-link" onclick="increaseAndExecuteFunction({{ page_obj.number }})" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    </button>
+
                 </li>
                 {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" aria-label="Next">
+                    <button class="page-link" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    </button>
                 </li>
                 {% endif %}
             </ul>
