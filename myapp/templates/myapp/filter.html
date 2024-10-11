@@ -171,12 +171,18 @@
     </div>
 </nav>
 
-<div class="container row border border-secondary mt-4">
+<div class="container row mt-4">
 <!--COLUMN WITH FILTERS-->
-    <div class="col-3 text-center border border-secondary">
+    <div class="col-3 text-center">
+
 <!--    KATEGORIE-->
-        <div class="row text-start border border-secondary mt-1">
-            <p class="text-start fs-4 fw-bold">Kategorie</p>
+        <div class="row text-start mt-1 mb-3">
+            <p class="text-start fs-4 fw-bold">
+                Kategorie
+            <button onclick="clearSessionStorageButton()" class="btn">
+                Wyczyść filtry
+            </button>
+            </p>
             <div class="text-start">
                 <input name="category" value="akcja" class="form-check-input-category border border-secondary" type="checkbox" id="akcja">
                 <label class="form-check-label" for="akcja">
@@ -203,77 +209,87 @@
             </div>
         </div>
 <!--    END        -->
-        <div class="row text-start border border-secondary">
+
+<!--    ACCESSIBILITY-->
+        <div class="row text-start mb-3">
             <p class="text-start fs-5 fw-bold">Dostępność</p>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_24h">
+                <input name="accessibility" class="form-check-input-author border border-secondary" type="checkbox" value="24h" id="send_24h">
                 <label class="form-check-label-author" for="send_24h">
                 Wysyłamy w 24 h
                 </label>
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_3days">
+                <input name="accessibility" class="form-check-input-author border border-secondary" type="checkbox" value="3d" id="send_3days">
                 <label class="form-check-label text-start" for="send_3days">
                 Wysyłamy w 3 dni
                 </label>
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_5days">
+                <input name="accessibility" class="form-check-input-author border border-secondary" type="checkbox" value="7d" id="send_5days">
                 <label class="form-check-label" for="send_5days">
                 Wysyłamy w 5-7 dni
                 </label>
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="send_10days">
+                <input name="accessibility" class="form-check-input-author border border-secondary" type="checkbox" value="10d" id="send_10days">
                 <label class="form-check-label" for="send_10days">
                 Wysyłamy w 10 dni
                 </label>
             </div>
         </div>
-        <div class="row text-start border border-secondary">
+<!--    END-->
+
+<!--    TREND-->
+        <div class="row text-start mb-3">
             <p class="text-start fs-5 fw-bold">TOP</p>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_week">
+                <input name="trend" class="form-check-input-author border border-secondary" type="checkbox" value="week" id="top_week">
                 <label class="form-check-label-author" for="top_week">
                 Tygodnia
                 </label>
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_month">
+                <input name="trend" class="form-check-input-author border border-secondary" type="checkbox" value="month" id="top_month">
                 <label class="form-check-label text-start" for="top_month">
                 Miesiąca
                 </label>
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_year">
+                <input name="trend" class="form-check-input-author border border-secondary" type="checkbox" value="year" id="top_year">
                 <label class="form-check-label" for="top_year">
                 Bieżącego roku
                 </label>
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="top_last_year">
+                <input name="trend" class="form-check-input-author border border-secondary" type="checkbox" value="lastYear" id="top_last_year">
                 <label class="form-check-label" for="top_last_year">
                 Zeszłego roku
                 </label>
             </div>
         </div>
-        <div class="row text-start border border-secondary">
+<!--    END-->
+
+<!--    NEWSNESS-->
+        <div class="row text-start mb-3">
             <p class="text-start fs-5 fw-bold">NOWOSC</p>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="new_yes">
+                <input name="newness" class="form-check-input-author border border-secondary" type="checkbox" value="yes" id="new_yes">
                 <label class="form-check-label-author" for="new_yes">
                 Tak
                 </label>
             </div>
         </div>
+<!--    END-->
+
 <!--    AUTORZY-->
-        <div class="row text-start border border-secondary">
+        <div class="row text-start mb-3">
             <p class="text-start fs-4 fw-bold">Autorzy</p>
             <div class="text-start">
                 <input name="author" value="Mickiewicz" class="form-check-input-author border border-secondary" type="checkbox" id="Mickiewicz">
@@ -304,10 +320,12 @@
             </div>
         </div>
 <!--    END        -->
-        <div class="row text-start border border-secondary">
+
+<!--    STARS-->
+        <div class="row text-start mb-3">
             <p class="text-start fs-4 fw-bold">Ocena</p>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="five_star">
+                <input name="stars" class="form-check-input-author" type="checkbox" value="5" id="five_star">
                 <label class="form-check-label-author" for="five_star">
                 5 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
                     <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
@@ -318,7 +336,7 @@
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="four_star">
+                <input name="stars" class="form-check-input-author" type="checkbox" value="4" id="four_star">
                 <label class="form-check-label text-start" for="four_star">
                 4 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
                     <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
@@ -328,7 +346,7 @@
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="three_star">
+                <input name="stars" class="form-check-input-author" type="checkbox" value="3" id="three_star">
                 <label class="form-check-label" for="three_star">
                 3 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
                     <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
@@ -337,21 +355,23 @@
 
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="two_star">
+                <input name="stars" class="form-check-input-author" type="checkbox" value="2" id="two_star">
                 <label class="form-check-label" for="two_star">
                 2 gwiazdek <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
                     <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
                 </label>
             </div>
             <div class="text-start">
-                <input class="form-check-input-author border border-secondary" type="checkbox" value="" id="one_star">
+                <input name="stars" class="form-check-input-author" type="checkbox" value="1" id="one_star">
                 <label class="form-check-label" for="one_star">
                 1 gwiazdka <i style="color: gold;" class="fa fa-star fa-5" aria-hidden="true"></i>
                 </label>
             </div>
         </div>
+<!--    END-->
+
 <!--    PRICE INPUTS-->
-        <div class="row border border-secondary mt-1">
+        <div class="row mt-1 mb-3">
             <p class="text-start fs-4 fw-bold">Cena</p>
             <div class="col">
                 <input id="minRange" name="minRange" class="form-control rounded-pill" type="text" placeholder="min">
@@ -365,7 +385,7 @@
 <!--    END-->
 
 <!--    BUTTON-->
-        <div class="d-grid mt-2">
+        <div class="d-grid mt-2 mb-3">
             <button onclick="applyFilters()" class="btn btn-danger rounded-pill text-nowrap" type="button">
                 POKAŻ WYNIKI
                 <i class="fa fa-search"></i>
@@ -394,7 +414,7 @@
 <!--    LOOP OF CARDS-->
         <div class="row row-cols-4 g-4" id="books-container">
             {% for book in page_obj %}
-            <div class="card d-flex flex-column border border-secondary" style="border:none;">
+            <div class="card d-flex flex-column" style="border:none;">
                 <a href="{% url 'show_book' book.id %}">
                     <img src="{{ book.file.url }}" class="card-img-top" alt="" style="width: 80%;">
                 </a>
@@ -415,8 +435,8 @@
 <!--    END-->
 
 <!--    PAGINATOR-->
-        <nav id="books-nav" class="border border-secondary pt-3" aria-label="Page navigation example">
-            <ul id="nav-ul" class="pagination justify-content-end border border-danger">
+        <nav id="books-nav" class="pt-3" aria-label="Page navigation example">
+            <ul id="nav-ul" class="pagination justify-content-end">
                 {% if page_obj.has_previous %}
                 <li class="page-item">
                     <button class="page-link" onclick="decreaseAndExecuteFunction({{ page_obj.page_number }})" aria-label="Previous">
