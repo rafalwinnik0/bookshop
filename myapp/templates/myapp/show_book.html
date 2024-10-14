@@ -9,7 +9,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ book.title }}</h5>
-                    <p class="card-text">${{ book.price }}</p>
+                    <p class="card-text">{{ book.price }} zł</p>
                     <p class="card-text">{{ book.description }}</p>
                     <p class="card-text fw-bold">
                         {% for gen in book.genres.all %}

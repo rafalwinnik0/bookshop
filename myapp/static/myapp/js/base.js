@@ -107,8 +107,8 @@ function changeQuantity(button, change) {
         .then(data => {
             if(data.success) {
                 quantityInput.value = data.new_quantity;
-                productPrice.innerHTML = "$" + data.new_value;
-                totalPrice.innerHTML = "$" + data.total;
+                productPrice.innerHTML = data.new_value + " zł";
+                totalPrice.innerHTML = data.total + " zł";
 
             } else {
                 alert("Nie można zaktualizować ilości");
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('navBarSearchInput');
     const dropdownMenu = document.createElement('ul');
     dropdownMenu.classList.add('dropdown-menu');
-    searchInput.parentNode.appendChild(dropdownMenu);  // Dodajemy dynamicznie dropdown
+    searchInput.parentNode.appendChild(dropdownMenu);
 
     searchInput.addEventListener('input', function() {
         const query = searchInput.value;
@@ -346,20 +346,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     dropdownMenu.appendChild(noResults);
                 }
 
-                // Pokaż dropdown
+
                 dropdownMenu.classList.add('show');
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         } else {
-            // Ukryj dropdown, jeśli input jest pusty
+
             dropdownMenu.classList.remove('show');
             dropdownMenu.innerHTML = '';
         }
     });
 
-    // Ukryj dropdown, jeśli klikniemy gdzieś poza nim
     document.addEventListener('click', function(event) {
         if (!searchInput.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownMenu.classList.remove('show');
@@ -579,6 +578,7 @@ function clearFiltersFromSessionStorage() {
 
 function applyFilters(page = 1) {
 
+    console.log("at the beginning: " + page);
     clearFiltersFromSessionStorage();
 
     let authors = [];
@@ -624,6 +624,7 @@ function applyFilters(page = 1) {
 
     sessionStorage.setItem('minRange', minRange);
     sessionStorage.setItem('maxRange', maxRange);
+    sessionStorage.setItem('piepszonaWartosc', page);
 
     let params = new URLSearchParams();
 
@@ -639,27 +640,11 @@ function applyFilters(page = 1) {
     if (maxRange) params.append('maxRange', maxRange);
 
     if (selectedSorting) params.append('selected_sorting', selectedSorting);
-    params.append('page', page);
 
+    params.append('page', page);
 
     window.location.href = `/new-filter/?${params.toString()}`;
 
-//    let data = {
-//        authors: authors,
-//        categories: categories,
-//        minRange: minRange,
-//        maxRange: maxRange
-//    };
-//
-//    fetch('/new-filter/', {
-//        method: 'POST',
-//        headers: {
-//            'Content-Type': 'application/json',
-//            'X-CSRFToken': getCookie('csrftoken')
-//        },
-//        body: JSON.stringify(data)
-//    });
-//    window.location.href = `/new-filter/`;
 }
 
 //LOADING FILTERS
@@ -688,4 +673,9 @@ function clearSessionStorageButton() {
     applyFilters();
 }
 
-document.getElementById('sort-options').addEventListener('change', applyFilters);
+const sortOptions = document.getElementById('sort-options');
+if (sortOptions) {
+    sortOptions.addEventListener('change', function() {
+        applyFilters(1);
+    });
+}

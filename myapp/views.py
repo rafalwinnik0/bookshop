@@ -246,7 +246,7 @@ def history(request):
 
 @login_required()
 def addresses(request):
-    user_profile = UserProfile.objects.get(user=request.user)
+    user_profile, profile_created = UserProfile.objects.get_or_create(user=request.user)
     addresses = UserAddress.objects.filter(profile=user_profile).prefetch_related('address')
     return render(request, 'myapp/addresses.html', {'addresses': addresses})
 
@@ -256,13 +256,22 @@ def fill_address(request):
     user_profile = UserProfile.objects.get(user=request.user)
     if user_profile:
         user_address = UserAddress.objects.filter(profile=user_profile).first()
-        response = {'success': True,
-                    'first_name': user_address.address.first_name,
-                    'last_name': user_address.address.last_name,
-                    'address': user_address.address.address,
-                    'zip_code': user_address.address.zip_code,
-                    'country': user_address.address.country,
-                    }
+        if user_address is None:
+            response = {'success': True,
+                        'first_name': '',
+                        'last_name': '',
+                        'address': '',
+                        'zip_code': '',
+                        'country': '',
+                        }
+        else:
+            response = {'success': True,
+                        'first_name': user_address.address.first_name,
+                        'last_name': user_address.address.last_name,
+                        'address': user_address.address.address,
+                        'zip_code': user_address.address.zip_code,
+                        'country': user_address.address.country,
+                        }
     else:
         response = {'success': False}
 
@@ -387,9 +396,9 @@ def new_filter(request):
     if category_filters:
         filters &= Q(genres__name__in=category_filters)
     if min_range:
-        filters &= Q(price__gte=int(min_range))
+        filters &= Q(price__gte=float(min_range))
     if max_range:
-        filters &= Q(price__lte=int(max_range))
+        filters &= Q(price__lte=float(max_range))
 
     books = Book.objects.filter(filters).distinct()
 
@@ -403,7 +412,7 @@ def new_filter(request):
         else:
             books = books.order_by('-price')
     else:
-        pass
+        books = books.order_by('title')
 
     paginator = Paginator(books, 8)
     page_number = request.GET.get('page')

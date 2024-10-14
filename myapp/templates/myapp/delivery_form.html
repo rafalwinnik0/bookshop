@@ -1,34 +1,65 @@
 {% extends 'myapp/base.html' %}
 {% block body %}
-<p>Order ID: {{ order_id }}</p>
+<!--<p>Order ID: {{ order_id }}</p>-->
 <!--<p>Status: {{ status }}</p>-->
-<button onclick="fillAddress()" class="btn btn-warning">Domyślny adres</button>
+<div class="progress mt-4" role="progressbar" aria-label="Example with label" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar" style="width: 75%">75%</div>
+</div>
 <div class="row d-flex justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-4 mt-4">
         <form method="POST">
         {% csrf_token %}
             <h3 class="">Billing adress</h3>
-            <div class="mt-3">
-                <label for="firstName">First name:</label>
-                {{ form.first_name }}
-            </div>
-            <div class="mt-3">
-                <label for="lastName">Last name:</label>
-                {{ form.last_name }}
-            </div>
-            <div class="mt-3">
-                <label for="address">Address:</label>
-                {{ form.address }}
-            </div>
-            <div class="mt-3">
-                <label for="zipCode">Zip code:</label>
-                {{ form.zip_code }}
-            </div>
-            <div class="mt-3">
-                <label for="country">Country:</label>
-                {{ form.country }}
-            </div>
-        <button class="btn btn-success mt-3" type="submit">Gotowe</button>
+            <table class="table table-borderless" >
+                <tbody>
+
+                    <tr>
+                        <td>
+                            First name:
+                        </td>
+                        <td>
+                            {{ form.first_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Last name:
+                        </td>
+                        <td>
+                            {{ form.last_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Address:
+                        </td>
+                        <td>
+                            {{ form.address }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Zip code:
+                        </td>
+                        <td>
+                            {{ form.zip_code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Country:
+                        </td>
+                        <td>
+                            {{ form.country }}
+                        </td>
+                    </tr>
+                <tr>
+                    <td><button onclick="fillAddress()" class="btn btn-warning">Domyślny adres</button></td>
+                    <td><button class="btn btn-success" type="submit">Gotowe</button></td>
+                </tr>
+                </tbody>
+            </table>
+
         </form>
     </div>
 </div>
