@@ -1,8 +1,15 @@
 asgiref==3.8.1
+click==8.1.7
+dj-database-url==2.2.0
 Django==5.1
 django-axes==6.5.1
 django-recaptcha==4.0.0
+gunicorn==23.0.0
+h11==0.14.0
+packaging==24.1
 pillow==10.4.0
 psycopg2-binary==2.9.9
 sqlparse==0.5.1
+typing_extensions==4.12.2
+uvicorn==0.32.0
 whitenoise==6.7.0
