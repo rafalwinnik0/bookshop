@@ -107,7 +107,9 @@ WSGI_APPLICATION = "bookshop.wsgi.application"
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://postgres:1234@localhost:5432/db_bookshop', conn_max_age=600)
+    'default': dj_database_url.config(
+        default='postgresql://postgres:1234@localhost:5432/db_bookshop',
+        conn_max_age=600)
 }
 
 # Password validation
