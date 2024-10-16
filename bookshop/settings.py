@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-^b15zcq^01xhl-xagupsm4+*u(3m^7eh)gb57i@*j62m0h184_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'bookshop-qq10.onrender.com', 'https://bookshop-gqpx.onrender.com']
 
 
 # Application definition
