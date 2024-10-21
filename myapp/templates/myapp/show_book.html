@@ -1,7 +1,7 @@
 {% extends 'myapp/base.html' %}
 {% block body %}
 <div class="row d-flex justify-content-center">
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card mb-3 mt-3 border-0" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-4 my-auto">
                 <img src="{{ book.file.url }}" class="img-fluid rounded-start" alt="...">
@@ -9,7 +9,9 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ book.title }}</h5>
-                    <p class="card-text">{{ book.price }} zł</p>
+                    <p class="card-subtitle">
+                        <a class="custom-link bg-toogle" style="" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
+                    </p>
                     <p class="card-text">{{ book.description }}</p>
                     <p class="card-text fw-bold">
                         {% for gen in book.genres.all %}
@@ -19,6 +21,9 @@
                     <p class="card-text"><small class="text-muted">Created: {{ book.created }}</small></p>
                     <p class="card-text"><small class="text-muted">Modified: {{ book.modified }}</small></p>
                     <p class="card-text"><small class="text-muted">{{gen}}</small></p>
+                    <p class="d-grid">
+                        <button onclick="addToCart({{ book.id }})" class="btn btn-danger mt-auto">{{ book.price }} zł</button>
+                    </p>
                 </div>
             </div>
         </div>

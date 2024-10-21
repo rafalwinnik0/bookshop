@@ -32,6 +32,9 @@ urlpatterns = [
     path('search-based-on-filter/', views.search_based_on_filter, name='search_based_on_filter'),
     path('category/', views.category, name='category'),
     path('new-filter/', views.new_filter, name='new_filter'),
+    path('for-men/', views.for_men, name='for_men'),
+    path('relation-books/', views.relation_books, name='relation_books'),
+    path('premieres/', views.premieres, name='premieres'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

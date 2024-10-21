@@ -494,16 +494,26 @@ function showFormResults () {
     });
 }
 
+function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
 function newsletterCommunicat(event) {
     event.preventDefault();
     const newsInput = document.getElementById('newsletterInput');
     const email = newsInput.value;
     if (email) {
-        newsInput.value = '';
-        alert("Thank you for joining to our society!");
+        if (isValidEmail(email)) {
+            newsInput.value = '';
+            alert("Thank you for joining to our society!");
+        } else {
+            alert("Enter correct email address!")
+        }
     } else {
-        alert("Enter email address!");
+        alert("Email address can not be empty!");
     }
+
 }
 
 function retrieveFromSessionStorage() {
@@ -578,7 +588,6 @@ function clearFiltersFromSessionStorage() {
 
 function applyFilters(page = 1) {
 
-    console.log("at the beginning: " + page);
     clearFiltersFromSessionStorage();
 
     let authors = [];
@@ -624,7 +633,6 @@ function applyFilters(page = 1) {
 
     sessionStorage.setItem('minRange', minRange);
     sessionStorage.setItem('maxRange', maxRange);
-    sessionStorage.setItem('piepszonaWartosc', page);
 
     let params = new URLSearchParams();
 
@@ -678,4 +686,26 @@ if (sortOptions) {
     sortOptions.addEventListener('change', function() {
         applyFilters(1);
     });
+}
+
+function setAuthor(author) {
+    clearFiltersFromSessionStorage();
+    let authors = [];
+    authors.push(author);
+    sessionStorage.setItem('authors', JSON.stringify(authors));
+    params = new URLSearchParams;
+    params.append('author', author);
+    window.location.href = `/new-filter/?${params.toString()}`;
+
+}
+
+function setCategory(category) {
+    clearFiltersFromSessionStorage();
+    let categories = [];
+    categories.push(category);
+    sessionStorage.setItem('categories', JSON.stringify(categories));
+    params = new URLSearchParams;
+    params.append('category', category);
+    window.location.href = `/new-filter/?${params.toString()}`;
+
 }

@@ -1,179 +1,10 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
 {% block body %}
-<nav class="navbar navbar-expand-lg" style="background-color:#E5E3E3;">
-    <div class="container-fluid d-flex justify-content-center align-items-center" style="color: #000;">
-        <ul class="navbar-nav d-flex flex-grow-1 justify-content-center">
-            <li class="nav-item dropdown">
-                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
-                <img width="30" height="25" src="{% static 'icons8-book-100_nav.png' %}" alt=""/> KSIĄŻKI
-                </a>
-                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h6>Książki</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="{% url 'new_filter' %}">Biografie</a></li>
-                                <li><a class="dropdown-item" href="#">Dla dzieci</a></li>
-                                <li><a class="dropdown-item" href="#">Fantastyka</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Obcojęzyczne</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Angielskie</a></li>
-                                <li><a class="dropdown-item" href="#">Francuskie</a></li>
-                                <li><a class="dropdown-item" href="#">Hiszpańskie</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Podręczniki</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Przedszkole</a></li>
-                                <li><a class="dropdown-item" href="#">Szkoła podstawowa</a></li>
-                                <li><a class="dropdown-item" href="#">Liceum i technikum</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
-                <img width="30" height="25" src="{% static 'icons8-ebook-100.png' %}" alt=""/>E-BOOKI
-                </a>
-                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h6>E-booki</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Biografie</a></li>
-                                <li><a class="dropdown-item" href="#">Dla młodieży</a></li>
-                                <li><a class="dropdown-item" href="#">Fantastyka</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Odkryj</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">TOP</a></li>
-                                <li><a class="dropdown-item" href="#">NOWOŚCI</a></li>
-                                <li><a class="dropdown-item" href="#">ZAPOWIEDZI</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Popularne serie</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Artefakty</a></li>
-                                <li><a class="dropdown-item" href="#">Mroczna strona</a></li>
-                                <li><a class="dropdown-item" href="#">Reportaż</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
-                <img width="30" height="30" src="{% static 'icons8-headphones-100.png' %}" alt=""/> AUDIOBOOKI
-                </a>
-                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h6>Audiobooki</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Biografie</a></li>
-                                <li><a class="dropdown-item" href="#">Biznes i ekonomia</a></li>
-                                <li><a class="dropdown-item" href="#">Dla młodieży</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Young Adult</a></li>
-                                <li><a class="dropdown-item" href="#">Dla dzieci 5</a></li>
-                                <li><a class="dropdown-item" href="#">Encyklopedie</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Odkryj</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">TOP</a></li>
-                                <li><a class="dropdown-item" href="#">NOWOŚCI</a></li>
-                                <li><a class="dropdown-item" href="#">ZAPOWIEDZI</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
-                <img width="30" height="28" src="{% static 'icons8-music-symbol-100.png' %}" alt=""/> MUZYKA
-                </a>
-                <div class="dropdown-menu dropdown-menu-nav p-3" aria-labelledby="navbarDropdown" style="width: 600px;">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h6>Muzyka</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Alternatywa</a></li>
-                                <li><a class="dropdown-item" href="#">Blues</a></li>
-                                <li><a class="dropdown-item" href="#">Country</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Awangarda</a></li>
-                                <li><a class="dropdown-item" href="#">Chillout</a></li>
-                                <li><a class="dropdown-item" href="#">Jazz</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Odkryj</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item disable" >TOP</a></li>
-                                <li><a class="dropdown-item" >NOWOŚCI</a></li>
-                                <li><a class="dropdown-item" >ZAPOWIEDZI</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link font-monospace" style="font-family:Poppins;color: grey;" href="#" role="button" aria-expanded="false">
-                <img width="30" height="30" src="{% static 'icons8-ps-controller-100.png' %}" alt=""/> GRY I ZABAWY
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-nav p-3"  data-bs-popper="static" aria-labelledby="navbarDropdown" style="width: 600px; right:0;">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h6>Gry i zabawki</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Dla maluchów</a></li>
-                                <li><a class="dropdown-item" href="#">Figurki</a></li>
-                                <li><a class="dropdown-item" href="#">Lalki i akcesoria</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Edukacyjne</a></li>
-                                <li><a class="dropdown-item" href="#">Klocki</a></li>
-                                <li><a class="dropdown-item" href="#">Łamigłówki</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h6>Puzzle, układanki</h6>
-                            <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="#">Puzzle do 99 el.</a></li>
-                                <li><a class="dropdown-item" href="#">Puzzle 100-300 el.</a></li>
-                                <li><a class="dropdown-item" href="#">Puzzle 500 el.</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <div class="container row mt-4">
 <!--COLUMN WITH FILTERS-->
-    <div class="col-3 text-center">
+    <div class="col-12 col-md-4 text-center">
 
 <!--    KATEGORIE-->
         <div class="row text-start mt-1 mb-3">
@@ -394,7 +225,7 @@
 <!--    END-->
     </div>
 <!--END-->
-    <div class="col-9 text-center">
+    <div class="col-12 col-md-8 text-center">
 
 <!--    SORTING OPTION-->
         <div class="" style="height:60px;">
@@ -412,7 +243,7 @@
 <!--    END-->
 
 <!--    LOOP OF CARDS-->
-        <div class="row row-cols-4 g-4" id="books-container">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4" id="books-container">
             {% for book in page_obj %}
             <div class="card d-flex flex-column" style="border:none;">
                 <a href="{% url 'show_book' book.id %}">
@@ -476,37 +307,6 @@
 <!--    END-->
     </div>
 </div>
-<hr class="featurette-divider">
-<div id="newsletterDiv" class="container row d-flex align-items-center mt-5 mb-5 " data-bs-theme="light" style="height:300px; background-color:#E5E3E3; font-family:Poppins">
-    <div class="col ">
-        <p class="text-center fs-1 fw-bold" style="color: #000;">
-            Zapisz się do <a class="text-white text-decoration-none fw-bold bg bg-danger" >newslettera!</a>
-        </p>
-        <p class="text-center fs-5" style="color: #000;">
-            <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Bądź na bieżąco z nowościami
-        </p>
-        <p class="text-center fs-5" style="color: #000;">
-            <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Otrzymuj specjalne oferty
-        </p>
-    </div>
-    <div class="col">
-        <p style="color: #000;">
-            Administratorem Twoich danych osobowych jest Bookshop. Więcej informacji na temat zasad przetwarzania danych znajdziesz w
-            <span class="text-danger fw-bold">Polityce Prywatności</span>.
-        </p>
-        <div class="d-flex" role="search">
-            <input id="newsletterInput" class="form-control me-2 rounded-pill border border-secondary" type="text" placeholder="Wprowadź swój adres e-mail" aria-label="Search">
-            <button onclick="newsletterCommunicat(event)" class="btn btn-danger rounded-pill" type="submit">
-            SUBSKRYBUJ
-            </button>
-        </div>
-        <div class="form-check mt-2 text-body">
-            <input class="form-check-input border border-secondary" type="checkbox" value="" id="sub">
-            <label class="form-check-label text-body-secondary text-body" for="sub" style="font-size:12px;">
-                Wyrażam zgodę na otrzymywanie na podany adres e-mail informacji marketingowych i handlowych związanych z działalnością
-                Bookshop. Jestem świadomy/-a, że zgodę tę mogę w każdej chwili wycofać.
-            </label>
-        </div>
-    </div>
-</div>
+
+
 {% endblock %}

@@ -34,20 +34,8 @@
     .dropdown:hover .dropdown-menu-nav {
       display: block;
     }
-    .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 35%;
-    width: 30%;
-    max-height: 600px;
-    overflow-y: auto;
-    }
-    .dropdown-item {
-        cursor: pointer;
-        padding: 8px 16px;
-    }
-    .custom-link {
 
+    .custom-link {
         text-decoration: none;
     }
     .custom-link:hover {
@@ -73,28 +61,28 @@
                 <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
             </symbol>
         </svg>
-<!--    NAVBAR-->
+
         <div class="container navbar fixed-top bg-light">
-            <div class="container-fluid d-flex justify-content-between">
+            <div class="container-fluid d-flex justify-content-between flex-nowrap">
                 <div class="">
                     <a class="navbar-brand" href="{% url 'index' %}">
                         <img src="{% static 'navbar_img.png' %}" alt="logo" width="33" height="26,4" class="d-inline-block align-text-top">
-                        <a href="{% url 'index' %}" style="color:red; font-size:20px;font-family:Times New Roman; text-decoration: none;">BOOKSHOP</a>
+        <!--                <a href="{% url 'index' %}" style="color:red; font-size:20px;font-family:Times New Roman; text-decoration: none;">BOOKSHOP</a>-->
                     </a>
 
                 </div>
                 <div class="">
                     <form class="d-flex" role="search" id="searchForm">
                         <input id="navBarSearchInput" data-bs-theme="light" class="form-control me-2 rounded-pill border border-secondary" type="text" placeholder="SZUKAJ" aria-label="Search">
-                        <button class="btn" type="submit">
-                        <img src="{% static 'search_icon.png' %}" width="27" height="27" class="rounded-circle">
-                        </button>
+        <!--                <button class="btn" type="submit">-->
+        <!--                <img src="{% static 'search_icon.png' %}" width="27" height="27" class="rounded-circle">-->
+        <!--                </button>-->
                     </form>
                 </div>
                 <div class="dropdown d-flex" >
                     {% if user.is_authenticated %}
                     <a class="navbar-brand dropdown-toggle" style="color: #000;" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-<!--                        <i class="fa fa-user"></i>-->
+        <!--                        <i class="fa fa-user"></i>-->
                     <img width="30" height="30" src="{% static 'icons8-user-100.png' %}" alt=""/>
                         {{ user.username }}
                     </a>
@@ -111,14 +99,14 @@
                     </ul>
                     <a class="navbar-brand" href="{% url 'cart' %}">
                         <i class="fa fa-shopping-cart position-relative" style="color:#ffa500;">
-<!--                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">-->
-<!--                            1-->
-<!--                            </span>-->
+        <!--                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">-->
+        <!--                            1-->
+        <!--                            </span>-->
                         </i>
                     </a>
                     {% else %}
                     <a class="navbar-brand dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i>
+                        <img width="30" height="30" src="{% static 'icons8-user-100.png' %}" alt=""/>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'register' %}">Zarejestruj</a></li>
@@ -163,26 +151,96 @@
                 </div>
             </div>
         </div>
-<!--    END NAVBAR-->
 
-<!--      THEME MODE-->
 
-<!--END THEME MODE-->
+        <!--    NAV-->
+        <ul class="container nav justify-content-around flex-nowrap p-1" style="background-color:#E5E3E3;">
+            <li class="nav-item dropdown">
+                <a class="nav-link font-monospace" href="{% url 'new_filter' %}" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
+                    <img width="30" height="25" src="{% static 'icons8-book-100_nav.png' %}" alt=""/> KSIĄŻKI
+                </a>
+                <div class="dropdown-menu dropdown-menu-nav p-2" aria-labelledby="navbarDropdown" style="min-width: 300px;">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>Autorzy</h6>
+                            <ul class="list-unstyled">
+                                <li><button class="dropdown-item" onclick="setAuthor('Mickiewicz')">Mickiewicz</button></li>
+                                <li><button class="dropdown-item" onclick="setAuthor('Skarga')">Skarga</button></li>
+                                <li><button class="dropdown-item" onclick="setAuthor('Sienkiewicz')">Sienkiewicz</button></li>
+                                <li><button class="dropdown-item" onclick="setAuthor('Baczynski')">Baczyński</button></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <h6>Kategorie</h6>
+                            <ul class="list-unstyled">
+                                <li><button class="dropdown-item" onclick="setCategory('akcja')">Akcja</button></li>
+                                <li><button class="dropdown-item" onclick="setCategory('komedia')">Komedia</button></li>
+                                <li><button class="dropdown-item" onclick="setCategory('przygoda')">Przygoda</button></li>
+                                <li><button class="dropdown-item" onclick="setCategory('historia')">Historia</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-monospace " style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
+                <img width="30" height="25" src="{% static 'icons8-ebook-100.png' %}" alt=""/>E-BOOKI
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
+                <img width="30" height="30" src="{% static 'icons8-headphones-100.png' %}" alt=""/> AUDIOBOOKI
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
+                <img width="30" height="28" src="{% static 'icons8-music-symbol-100.png' %}" alt=""/> MUZYKA
+                </a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">-->
+<!--                <img width="30" height="30" src="{% static 'icons8-ps-controller-100.png' %}" alt=""/> GRY I ZABAWY-->
+<!--                </a>-->
+<!--            </li>-->
+        </ul>
+        <!--    END-->
 
         <div class="container">
         {% block body %}
         {% endblock %}
-<!--            <footer class="">-->
-<!--                <ul class="nav justify-content-center border-bottom pb-3 mb-3">-->
-<!--                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>-->
-<!--                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>-->
-<!--                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>-->
-<!--                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>-->
-<!--                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>-->
-<!--                </ul>-->
-<!--                <p class="text-center text-body-secondary">icons by Icons8</p>-->
-<!--            </footer>-->
-            <footer class="container">
+            <div id="newsletterDiv" class="row d-flex align-items-center mt-5 mb-5 " data-bs-theme="light" style="background-color:#E5E3E3; font-family:Poppins; padding: 30px;">
+                <div class="col-sm-12 col-md-6">
+                    <p class="text-center fs-1 fw-bold" style="color: #000;">
+                        Zapisz się do <a class="text-white text-decoration-none fw-bold bg bg-danger" >newslettera!</a>
+                    </p>
+                    <p class="text-center fs-5" style="color: #000;">
+                        <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Bądź na bieżąco z nowościami
+                    </p>
+                    <p class="text-center fs-5" style="color: #000;">
+                        <i class="fa fa-check" style="color:red;" aria-hidden="true"></i>Otrzymuj specjalne oferty
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <p style="color: #000;">
+                        Administratorem Twoich danych osobowych jest Bookshop. Więcej informacji na temat zasad przetwarzania danych znajdziesz w
+                        <span class="text-danger fw-bold">Polityce Prywatności</span>.
+                    </p>
+                    <div class="d-flex" role="search">
+                        <input id="newsletterInput" class="form-control me-2 rounded-pill border border-secondary" type="email" placeholder="Wprowadź swój adres e-mail" aria-label="Search">
+                        <button onclick="newsletterCommunicat(event)" class="btn btn-danger rounded-pill" type="submit">
+                        SUBSKRYBUJ
+                        </button>
+                    </div>
+                    <div class="form-check mt-2 text-body">
+                        <input class="form-check-input border border-secondary" type="checkbox" value="" id="sub">
+                        <label class="form-check-label text-body-secondary text-body" for="sub" style="font-size:12px;">
+                            Wyrażam zgodę na otrzymywanie na podany adres e-mail informacji marketingowych i handlowych związanych z działalnością
+                            Bookshop. Jestem świadomy/-a, że zgodę tę mogę w każdej chwili wycofać.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <footer class="container mt-4">
                 <p class="float-end"><a href="#">Back to top</a></p>
                 <p>&copy; 2017–2023 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
                 <p class="text-center text-body-secondary">icons by Icons8</p>

@@ -419,3 +419,16 @@ def new_filter(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'myapp/filter.html', {'page_obj': page_obj,
                                                  'sorting_method': sorting_method})
+
+
+def for_men(request):
+    return render(request, 'myapp/bestsellers_for_men.html')
+
+
+def premieres(request):
+    return render(request, 'myapp/premieres.html')
+
+
+def relation_books(request):
+    return render(request, 'myapp/relation_books.html')
+
