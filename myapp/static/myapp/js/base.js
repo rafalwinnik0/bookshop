@@ -284,6 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('navBarSearchInput');
     const dropdownMenu = document.createElement('ul');
     dropdownMenu.classList.add('dropdown-menu');
+    dropdownMenu.classList.add('dropdown-menu-search');
     searchInput.parentNode.appendChild(dropdownMenu);
 
     searchInput.addEventListener('input', function() {

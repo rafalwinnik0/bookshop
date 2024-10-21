@@ -44,6 +44,24 @@
     .custom-link h6, .custom-link p {
         text-decoration: none;
     }
+
+    .dropdown-menu-search {
+        position: absolute;
+        top: 100%;
+        left: 25;
+        width: 25%;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+        padding: 8px 16px;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
     </style>
     <body>
         <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -72,7 +90,7 @@
 
                 </div>
                 <div class="">
-                    <form class="d-flex" role="search" id="searchForm">
+                    <form class="" role="search" id="searchForm">
                         <input id="navBarSearchInput" data-bs-theme="light" class="form-control me-2 rounded-pill border border-secondary" type="text" placeholder="SZUKAJ" aria-label="Search">
         <!--                <button class="btn" type="submit">-->
         <!--                <img src="{% static 'search_icon.png' %}" width="27" height="27" class="rounded-circle">-->
@@ -226,7 +244,7 @@
                         <span class="text-danger fw-bold">Polityce Prywatności</span>.
                     </p>
                     <div class="d-flex" role="search">
-                        <input id="newsletterInput" class="form-control me-2 rounded-pill border border-secondary" type="email" placeholder="Wprowadź swój adres e-mail" aria-label="Search">
+                        <input id="newsletterInput" class="form-control me-2 rounded-pill border border-secondary" type="email" placeholder="Podaj swój adres e-mail" aria-label="Search">
                         <button onclick="newsletterCommunicat(event)" class="btn btn-danger rounded-pill" type="submit">
                         SUBSKRYBUJ
                         </button>
