@@ -74,6 +74,12 @@
             object-fit: cover;
         }
     }
+
+    @media (max-width: 576px) {
+    .text-sm-nav {
+        font-size: 0.75rem;      /* Smaller font size for narrow screens */
+    }
+    }
     .navbar-brand-main img:hover {
         transform: scale(1.15) rotate(30deg);
     }
@@ -185,10 +191,9 @@
             </div>
         </div>
 
-
         <!--    NAV-->
-        <ul class="container nav justify-content-around flex-nowrap" style="background-color:#E5E3E3;">
-            <li class="nav-item dropdown text-nowrap">
+        <ul class="container nav justify-content-around flex-nowrap text-sm-nav" style="background-color:#E5E3E3; max-height: 100px;">
+            <li class="nav-item dropdown w-25 text-nowrap">
                 <a class="nav-link font-monospace" href="{% url 'new_filter' %}" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
                     <img width="30" height="25" src="{% static 'icons8-book-100_nav.png' %}" alt=""/> KSIĄŻKI
                 </a>
@@ -215,17 +220,17 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item text-nowrap">
-                <a class="nav-link font-monospace " style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
-                <img width="30" height="25" src="{% static 'icons8-ebook-100.png' %}" alt=""/>E-BOOKI
+            <li class="nav-item w-25 text-nowrap">
+                <a class="nav-link  font-monospace " style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
+                    <img width="30" height="28"  src="{% static 'icons8-ebook-100.png' %}" alt=""/>E-BOOKI
                 </a>
             </li>
-            <li class="nav-item text-nowrap">
+            <li class="nav-item w-25 text-nowrap">
                 <a class="nav-link" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
                 <img width="30" height="30" src="{% static 'icons8-headphones-100.png' %}" alt=""/> AUDIOBOOKI
                 </a>
             </li>
-            <li class="nav-item text-nowrap">
+            <li class="nav-item w-25 text-nowrap">
                 <a class="nav-link" style="font-family:Poppins;color: grey;" role="button" aria-expanded="false">
                 <img width="30" height="28" src="{% static 'icons8-music-symbol-100.png' %}" alt=""/> MUZYKA
                 </a>
