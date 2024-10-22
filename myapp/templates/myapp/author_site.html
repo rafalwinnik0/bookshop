@@ -22,7 +22,7 @@
         </p>
     </div>
     <div class="d-grid">
-        <button onclick="addToCart({{ book.id }})" class="btn btn-danger mt-auto">{{ book.price }} zł</button>
+        <button onclick="addToCart({{ book.id }})" class="btn btn-danger mt-auto">{{ book.price|floatformat:2 }} zł</button>
     </div>
 </div>
 {% endfor %}
