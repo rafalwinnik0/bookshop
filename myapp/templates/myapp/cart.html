@@ -57,7 +57,7 @@ BOOKSHOP</a>
                                     </div>
                                 </td>
                                 <td class="align-middle">
-                                    <p id="total-price-{{ item.id }}"  class="fs-5 mb-0" style="font-weight: 500;">{{ item.total_price }} zł</p>
+                                    <p id="total-price-{{ item.id }}"  class="fs-5 mb-0" style="font-weight: 500;">{{ item.total_price|floatformat:2 }} zł</p>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -69,7 +69,7 @@ BOOKSHOP</a>
                                 <td>
                                     <a href="{% url 'delivery_form' order_id  %}" class="btn btn-success">Przejdź do dostawy</a>
                                 </td>
-                                <td><p class="fs-4 fw-bold" id="totalCart">{{ total_cost }} zł</p></td>
+                                <td><p class="fs-4 fw-bold" id="totalCart">{{ total_cost|floatformat:2 }} zł</p></td>
                             </tr>
                             {% else %}
                             <p class="text-center">Twój koszyk jest pusty.</p>

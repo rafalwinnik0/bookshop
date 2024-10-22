@@ -38,7 +38,7 @@ function addToCart(bookId) {
             console.error('Error:', error);
         });
     } else {
-        alert("Zaloguj się, aby dodać element");
+        alert("Zaloguj się, aby dodać element do koszyka");
     }
 }
 

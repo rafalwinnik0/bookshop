@@ -122,7 +122,7 @@
                                     <p class="card-subtitle">
                                         <a class="custom-link bg-toogle" style="font-size:12px;" href="{% url 'author_site' book.author %}">{{ book.author }}</a>
                                     </p>
-                                    <p class="card-subtitle fw-bold fs-5">{{ book.price }} zł</p>
+                                    <p class="card-subtitle fw-bold fs-5">{{ book.price|floatformat:2 }} zł</p>
                                 </div>
                                 <button onclick="addToCart({{ book.id }})" class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
                                     Dodaj do koszyka
