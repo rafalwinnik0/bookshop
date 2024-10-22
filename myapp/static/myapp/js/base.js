@@ -14,27 +14,32 @@ function getCookie(name) {
 }
 
 function addToCart(bookId) {
-    fetch('/add-to-cart/' + bookId + '/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify({ 'book_id': bookId })
-    })
-    .then(response => {
-        if(response.ok) {
-            return response.json();
-        }
-        throw new Error('Coś poszło nie tak z siecią.');
-    })
-    .then(data => {
-        console.log("Odpowiedź serwera:", data);
-        alert("Książka została dodana do koszyka!");
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+
+    if (isAuthenticated === "true") {
+        fetch('/add-to-cart/' + bookId + '/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ 'book_id': bookId })
+        })
+        .then(response => {
+            if(response.ok) {
+                return response.json();
+            }
+            throw new Error('Coś poszło nie tak z siecią.');
+        })
+        .then(data => {
+            console.log("Odpowiedź serwera:", data);
+            alert("Książka została dodana do koszyka!");
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    } else {
+        alert("Zaloguj się, aby dodać element");
+    }
 }
 
 function removeFromCart(itemId) {
