@@ -10,7 +10,7 @@
         <div class="row text-start mt-1 mb-3">
             <p class="text-start fs-4 fw-bold">
                 Kategorie
-            <button onclick="clearSessionStorageButton()" class="btn">
+            <button onclick="cleanFilters()" class="btn">
                 Wyczyść filtry
             </button>
             </p>
@@ -39,7 +39,7 @@
                 </label>
             </div>
         </div>
-<!--    END        -->
+<!--    END-->
 
 <!--    ACCESSIBILITY-->
         <div class="row text-start mb-3">
@@ -150,7 +150,7 @@
                 </label>
             </div>
         </div>
-<!--    END        -->
+<!--    END-->
 
 <!--    STARS-->
         <div class="row text-start mb-3">
@@ -243,7 +243,7 @@
 <!--    END-->
 
 <!--    LOOP OF CARDS-->
-        <div class="row row-cols-2 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4" id="books-container">
+        <div class="row row-cols-2 row-cols-sm-4 g-4" id="books-container">
             {% for book in page_obj %}
             <div class="card d-flex flex-column" style="border:none;">
                 <a href="{% url 'show_book' book.id %}">
@@ -256,8 +256,9 @@
                     </p>
                     <p class="card-subtitle fw-bold fs-5">{{ book.price|floatformat:2 }} zł</p>
                 </div>
-                <button onclick="addToCart({{ book.id }})" class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
-                    Dodaj do koszyka
+                <button onclick="addToCart({{ book.id }})"
+                        class="btn btn-sm btn-danger text-nowrap mt-auto rounded-pill">
+                    <span class="d-none d-lg-inline">Dodaj do koszyka</span>
                     <i class="fa fa-shopping-cart"></i>
                 </button>
             </div>
@@ -268,39 +269,39 @@
 <!--    PAGINATOR-->
         <nav id="books-nav" class="pt-3" aria-label="Page navigation example">
             <ul id="nav-ul" class="pagination justify-content-end">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <button class="page-link" onclick="decreaseAndExecuteFunction({{ page_obj.page_number }})" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </button>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <button class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </button>
-                </li>
-                {% endif %}
+<!--                {% if page_obj.has_previous %}-->
+<!--                <li class="page-item">-->
+<!--                    <button class="page-link" onclick="decreaseAndExecuteFunction({{ page_obj.page_number }})" aria-label="Previous">-->
+<!--                        <span aria-hidden="true">&laquo;</span>-->
+<!--                    </button>-->
+<!--                </li>-->
+<!--                {% else %}-->
+<!--                <li class="page-item disabled">-->
+<!--                    <button class="page-link" aria-label="Previous">-->
+<!--                        <span aria-hidden="true">&laquo;</span>-->
+<!--                    </button>-->
+<!--                </li>-->
+<!--                {% endif %}-->
 
                 {% for num in page_obj.paginator.page_range %}
                 <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                    <button class="page-link" onclick="applyFilters({{ num }})">{{ num }}</button>
+                    <button class="page-link" onclick="changePage({{ num }})">{{ num }}</button>
                 </li>
                 {% endfor %}
 
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <button class="page-link" onclick="increaseAndExecuteFunction({{ page_obj.number }})" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </button>
+<!--                {% if page_obj.has_next %}-->
+<!--                <li class="page-item">-->
+<!--                    <button class="page-link" onclick="increaseAndExecuteFunction({{ page_obj.number }})" aria-label="Next">-->
+<!--                        <span aria-hidden="true">&raquo;</span>-->
+<!--                    </button>-->
 
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <button class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </button>
-                </li>
+<!--                </li>-->
+<!--                {% else %}-->
+<!--                <li class="page-item disabled">-->
+<!--                    <button class="page-link" aria-label="Next">-->
+<!--                        <span aria-hidden="true">&raquo;</span>-->
+<!--                    </button>-->
+<!--                </li>-->
                 {% endif %}
             </ul>
         </nav>

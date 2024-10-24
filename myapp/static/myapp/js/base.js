@@ -594,8 +594,6 @@ function clearFiltersFromSessionStorage() {
 
 function applyFilters(page = 1) {
 
-    clearFiltersFromSessionStorage();
-
     let authors = [];
     document.querySelectorAll('input[name="author"]:checked').forEach((checkbox) => {
         authors.push(checkbox.value);
@@ -630,15 +628,15 @@ function applyFilters(page = 1) {
     let maxRange = document.getElementById('maxRange').value;
     let selectedSorting = document.getElementById('sort-options').value;
 
-    sessionStorage.setItem('authors', JSON.stringify(authors));
-    sessionStorage.setItem('categories', JSON.stringify(categories));
-    sessionStorage.setItem('accessibility', JSON.stringify(accessibility));
-    sessionStorage.setItem('trend', JSON.stringify(trend));
-    sessionStorage.setItem('newness', JSON.stringify(newness));
-    sessionStorage.setItem('stars', JSON.stringify(stars));
-
-    sessionStorage.setItem('minRange', minRange);
-    sessionStorage.setItem('maxRange', maxRange);
+//    sessionStorage.setItem('authors', JSON.stringify(authors));
+//    sessionStorage.setItem('categories', JSON.stringify(categories));
+//    sessionStorage.setItem('accessibility', JSON.stringify(accessibility));
+//    sessionStorage.setItem('trend', JSON.stringify(trend));
+//    sessionStorage.setItem('newness', JSON.stringify(newness));
+//    sessionStorage.setItem('stars', JSON.stringify(stars));
+//
+//    sessionStorage.setItem('minRange', minRange);
+//    sessionStorage.setItem('maxRange', maxRange);
 
     let params = new URLSearchParams();
 
@@ -648,6 +646,22 @@ function applyFilters(page = 1) {
 
     categories.forEach((category) => {
         params.append('category', category);
+    });
+
+    accessibility.forEach((access) => {
+        params.append('accessibility', access)
+    });
+
+    trend.forEach((tr) => {
+        params.append('trend', tr);
+    });
+
+    newness.forEach((nw) => {
+        params.append('newness', nw);
+    });
+
+    stars.forEach((star) => {
+        params.append('stars', star);
     });
 
     if (minRange) params.append('minRange', minRange);
@@ -663,7 +677,53 @@ function applyFilters(page = 1) {
 
 //LOADING FILTERS
 window.onload = function() {
-    retrieveFromSessionStorage();
+    var url = new URL(window.location.href);
+    var searchParams = new URLSearchParams(url.search);
+    searchParams.getAll('author').forEach((author) => {
+        let checkbox = document.querySelector(`input[name="author"][value="${author}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+    searchParams.getAll('category').forEach((category) => {
+        let checkbox = document.querySelector(`input[name="category"][value="${category}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+    searchParams.getAll('accessibility').forEach((access) => {
+        let checkbox = document.querySelector(`input[name="accessibility"][value="${access}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+    searchParams.getAll('trend').forEach((tr) => {
+        let checkbox = document.querySelector(`input[name="trend"][value="${tr}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+    var nw = searchParams.get('newness');
+    let checkbox = document.querySelector(`input[name="newness"][value="${nw}"]`);
+    if (checkbox) {
+        checkbox.checked = true;
+    }
+    searchParams.getAll('stars').forEach((star) => {
+        let checkbox = document.querySelector(`input[name="stars"][value="${star}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+
+    minRange = searchParams.get('minRange');
+    if (minRange) {
+        document.querySelector('input[name="minRange"]').value = minRange;
+    }
+    maxRange = searchParams.get('maxRange');
+    if (maxRange) {
+        document.querySelector('input[name="maxRange"]').value = maxRange;
+    }
+
 };
 
 function increaseAndExecuteFunction(pageNum) {
@@ -674,17 +734,13 @@ function decreaseAndExecuteFunction(pageNum) {
     applyFilters(pageNum - 1);
 }
 
-function clearSessionStorageButton() {
-    clearFiltersFromSessionStorage();
+function cleanFilters() {
     document.querySelector('input[name="minRange"]').value = '';
     document.querySelector('input[name="maxRange"]').value = '';
     document.querySelectorAll('input[type="checkbox"]:checked').forEach((checkbox) => {
         checkbox.checked = false;
     });
-//    document.querySelectorAll('input[name="category"]:checked').forEach((checkbox) => {
-//        checkbox.checked = false;
-//    });
-    applyFilters();
+
 }
 
 const sortOptions = document.getElementById('sort-options');
@@ -698,7 +754,7 @@ function setAuthor(author) {
     clearFiltersFromSessionStorage();
     let authors = [];
     authors.push(author);
-    sessionStorage.setItem('authors', JSON.stringify(authors));
+//    sessionStorage.setItem('authors', JSON.stringify(authors));
     params = new URLSearchParams;
     params.append('author', author);
     window.location.href = `/new-filter/?${params.toString()}`;
@@ -714,4 +770,14 @@ function setCategory(category) {
     params.append('category', category);
     window.location.href = `/new-filter/?${params.toString()}`;
 
+}
+
+function changePage(value) {
+    console.log(value);
+    console.log(typeof(value));
+    var url = new URL(window.location.href);
+    console.log(url);
+    url.searchParams.set('page', value);
+    console.log(url);
+    window.location.href = url;
 }
